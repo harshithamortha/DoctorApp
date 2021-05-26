@@ -27,6 +27,17 @@ public class AppointmentServiceImpl implements IAppointmentService {
 			result.forEach(resultList :: add);
 			return resultList;
 		}
+		
+		
+		@Override
+		public Appointment addAppointment(Appointment app) {
+			//Optional<Doctor> findById = docDao.findById(dr.getDoctorId());
+			if(app == null) {
+				throw new AppointmentException("Passed object cannot be null");
+			} else {
+				return appointmentDao.save(app);
+			}
+		}
 
 		@Override
 		public Appointment getAppointment(int appointmentId) {
@@ -42,7 +53,7 @@ public class AppointmentServiceImpl implements IAppointmentService {
 	    private Appointment appointment;
 		@Override
 		public boolean deleteAppointment(int appointmentId) {
-			if(appointmentId == appointment.getAppointmentId()) {
+			if(appointmentId > 0) {
 				appointmentDao.deleteById(appointmentId);
 				return true;		
 			} 
@@ -52,15 +63,12 @@ public class AppointmentServiceImpl implements IAppointmentService {
 		@Override
 		public boolean updateAppointment(Appointment bean) {
 			// TODO Auto-generated method stub
-			if(bean.getAppointmentId() == appointment.getAppointmentId()) {
-				appointment.setAppointmentId(bean.getAppointmentId());
-				appointment.setDoctor(bean.getDoctor());
-				appointment.setPatient(bean.getPatient());
-				appointment.setAppointmentDate(bean.getAppointmentDate());
-				appointment.setAppointmentStatus(bean.getAppointmentStatus());
-				return true;		
+			if(bean == null) {
+				throw new AppointmentException("Passed object can't be null");
+			} else {
+				appointmentDao.save(bean);
+				return true;
 			}
-			return false;
 		}
 	    
 		private Doctor dr;
@@ -68,18 +76,18 @@ public class AppointmentServiceImpl implements IAppointmentService {
 		public List<Appointment> getAppointments(Doctor doc) {
 			// TODO Auto-generated method stub
 			List<Appointment> appt  = new ArrayList<>();
-			if(appointment.getDoctor() == doc) {
+			if(appointment.getDoctor().getDoctorId() == doc.getDoctorId()) {
 				appt.add(appointment);
 			}
 			return appt;
 		}
 
 		@Override
-		public List<Appointment> getAppointments(LocalDate doc) {
+		public List<Appointment> getAppointments(LocalDate date) {
 			// TODO Auto-generated method stub
-			LocalDate localDate = appointment.getAppointmentDate().toLocalDate();
+			LocalDate localDate = appointment.getAppointmentDate();
 			List<Appointment> appt  = new ArrayList<>();
-			if(localDate == doc) {
+			if(localDate == date) {
 				appt.add(appointment);	
 			}
 			return appt;

@@ -1,8 +1,7 @@
 package com.cg.bookmydoctor.dto;
 
-import java.io.Serializable;  
-import java.util.Date;
-
+import java.io.Serializable;
+import java.time.LocalDate;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-//import com.cg.bookmydoctor.dto.*;
+
+
 @Entity
 @Table(name = "Availability_Dates")
 public class AvailabilityDates implements Serializable{
@@ -28,16 +28,16 @@ public class AvailabilityDates implements Serializable{
 	
 	
 	@Column(name="fromDate")
-	private Date fromDate;
+	private LocalDate fromDate;
 	
 	@Column(name="toDate")
-	private Date toDate;
+	private LocalDate toDate;
 	
 	
 	public AvailabilityDates() {}
-	
-	
-	public AvailabilityDates(int availabilityId, Doctor doctor, Date fromDate, Date toDate) {
+
+
+	public AvailabilityDates(int availabilityId, Doctor doctor, LocalDate fromDate, LocalDate toDate) {
 		super();
 		this.availabilityId = availabilityId;
 		this.doctor = doctor;
@@ -45,33 +45,44 @@ public class AvailabilityDates implements Serializable{
 		this.toDate = toDate;
 	}
 
-	
+
 	public int getAvailabilityId() {
 		return availabilityId;
 	}
+
+
 	public void setAvailabilityId(int availabilityId) {
 		this.availabilityId = availabilityId;
 	}
+
+
 	public Doctor getDoctor() {
 		return doctor;
 	}
+
+
 	public void setDoctor(Doctor doctor) {
 		this.doctor = doctor;
 	}
-	public Date getFromDate() {
+
+
+	public LocalDate getFromDate() {
 		return fromDate;
 	}
-	public void setFromDate(Date fromDate) {
+
+
+	public void setFromDate(LocalDate fromDate) {
 		this.fromDate = fromDate;
 	}
-	public Date getToDate() {
+
+
+	public LocalDate getToDate() {
 		return toDate;
 	}
-	public void setToDate(Date toDate) {
+
+
+	public void setToDate(LocalDate toDate) {
 		this.toDate = toDate;
-	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 
 
@@ -81,6 +92,6 @@ public class AvailabilityDates implements Serializable{
 				+ ", toDate=" + toDate + "]";
 	}
 	
-	
-	
 }
+	
+	

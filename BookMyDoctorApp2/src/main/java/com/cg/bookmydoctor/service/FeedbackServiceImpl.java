@@ -1,5 +1,6 @@
 package com.cg.bookmydoctor.service;
-import java.util.ArrayList; 
+
+
 import java.util.List;  
 import java.util.Optional;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.cg.bookmydoctor.dao.IFeedbackDao;
 import com.cg.bookmydoctor.dto.*;
+import com.cg.bookmydoctor.exception.AdminException;
 import com.cg.bookmydoctor.exception.DoctorException;
 import com.cg.bookmydoctor.exception.FeedBackException;
 import com.cg.bookmydoctor.service.IFeedbackService;
@@ -36,7 +38,6 @@ public class FeedbackServiceImpl implements IFeedbackService {
 	@Override
 	public FeedBack getFeedback(FeedBack fdb) {
 		Optional<FeedBack> fbdb = this.fbDao.findById(fdb.getRatingId());
-
 		if(fbdb.isPresent()) {
 			return fbdb.get();
 		} 
@@ -47,10 +48,9 @@ public class FeedbackServiceImpl implements IFeedbackService {
 	}
 
 	@Override
-	public List<FeedBack> getAllFeedback(Doctor doc) {
-		
+	public List<FeedBack> getAllFeedback(Doctor doctor) {
 		List<FeedBack> list = null;
-		if(fb.getDoctor().getDoctorId() == doc.getDoctorId()) {
+		if(fb.getDoctor().getDoctorId() == doctor.getDoctorId()) {
 			list.add(fb);
 		}
 		return list;

@@ -2,11 +2,7 @@ package com.cg.bookmydoctor.service;
 
 import java.time.LocalDate;
 import java.util.List;
-
-import com.cg.bookmydoctor.dto.Appointment;
-import com.cg.bookmydoctor.dto.AvailabilityDates;
 import com.cg.bookmydoctor.dto.Doctor;
-import com.cg.bookmydoctor.dto.FeedBack;
 import com.cg.bookmydoctor.dto.Patient;
 
 public interface IPatientService {

@@ -13,7 +13,8 @@ public interface IAppointmentService {
 	public boolean deleteAppointment(int appointmentId);
 	public boolean updateAppointment(Appointment bean);
 	public List<Appointment> getAppointments(Doctor doc);
-	public List<Appointment> getAppointments(LocalDate doc);
+	public List<Appointment> getAppointments(LocalDate date);
+	public Appointment addAppointment(Appointment app);
 	
 
 }
