@@ -3,16 +3,12 @@ package com.cg.bookmydoctor.service;
 import org.springframework.beans.factory.annotation.Autowired; 
 import org.springframework.stereotype.Service;
 import com.cg.bookmydoctor.dto.*;
-import com.cg.bookmydoctor.exception.AdminException;
 import com.cg.bookmydoctor.exception.AppointmentException;
-import com.cg.bookmydoctor.exception.DoctorException;
 import com.cg.bookmydoctor.dao.*;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 public class AppointmentServiceImpl implements IAppointmentService {
@@ -30,18 +26,16 @@ public class AppointmentServiceImpl implements IAppointmentService {
 		
 		
 		@Override
-		public Appointment addAppointment(Appointment app) {
-			//Optional<Doctor> findById = docDao.findById(dr.getDoctorId());
-			if(app == null) {
+		public Appointment addAppointment(Appointment appointment) {
+			if(appointment == null) {
 				throw new AppointmentException("Passed object cannot be null");
 			} else {
-				return appointmentDao.save(app);
+				return appointmentDao.save(appointment);
 			}
 		}
 
 		@Override
 		public Appointment getAppointment(int appointmentId) {
-			// TODO Auto-generated method stub
 	        Optional<Appointment> appointmentDb = this.appointmentDao.findById(appointmentId);
 			if(appointmentDb.isPresent()) {
 				return appointmentDb.get();
@@ -62,7 +56,6 @@ public class AppointmentServiceImpl implements IAppointmentService {
 
 		@Override
 		public boolean updateAppointment(Appointment bean) {
-			// TODO Auto-generated method stub
 			if(bean == null) {
 				throw new AppointmentException("Passed object can't be null");
 			} else {
@@ -70,11 +63,9 @@ public class AppointmentServiceImpl implements IAppointmentService {
 				return true;
 			}
 		}
-	    
-		private Doctor dr;
+
 		@Override
 		public List<Appointment> getAppointments(Doctor doc) {
-			// TODO Auto-generated method stub
 			List<Appointment> appt  = new ArrayList<>();
 			if(appointment.getDoctor().getDoctorId() == doc.getDoctorId()) {
 				appt.add(appointment);
@@ -84,7 +75,6 @@ public class AppointmentServiceImpl implements IAppointmentService {
 
 		@Override
 		public List<Appointment> getAppointments(LocalDate date) {
-			// TODO Auto-generated method stub
 			LocalDate localDate = appointment.getAppointmentDate();
 			List<Appointment> appt  = new ArrayList<>();
 			if(localDate == date) {

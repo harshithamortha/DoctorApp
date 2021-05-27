@@ -10,13 +10,13 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "FeedBacks")
+@Table(name = "Feedback")
 public class FeedBack {
 	
 	@Id
-	@Column(name = "ratingId", unique=true)
+	@Column(name = "feedbackId", unique=true)
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int ratingId;
+	private int feedbackId;
 	
 	@OneToOne
 	@JoinColumn(name = "patientId",referencedColumnName = "patientId")
@@ -29,57 +29,67 @@ public class FeedBack {
 	@Column(name="rating")
 	private int rating;
 	
-	@Column(name="feedback")
-	private String feedback;
+	@Column(name="feedbackComment")
+	private String feedbackComment;
 	
-	public FeedBack() {}
-	
-	public FeedBack(int ratingId, Patient patient, Doctor doctor, int rating, String feedback) {
+	public FeedBack() {
+		}
+
+	public FeedBack(int feedbackId, Patient patient, Doctor doctor, int rating, String feedbackComment) {
 		super();
-		this.ratingId = ratingId;
+		this.feedbackId = feedbackId;
 		this.patient = patient;
 		this.doctor = doctor;
 		this.rating = rating;
-		this.feedback = feedback;
+		this.feedbackComment = feedbackComment;
 	}
 
-	public int getRatingId() {
-		return ratingId;
+	public int getFeedbackId() {
+		return feedbackId;
 	}
-	public void setRatingId(int ratingId) {
-		this.ratingId = ratingId;
+
+	public void setFeedbackId(int feedbackId) {
+		this.feedbackId = feedbackId;
 	}
+
 	public Patient getPatient() {
 		return patient;
 	}
+
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
+
 	public Doctor getDoctor() {
 		return doctor;
 	}
+
 	public void setDoctor(Doctor doctor) {
 		this.doctor = doctor;
 	}
+
 	public int getRating() {
 		return rating;
 	}
+
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
-	public String getFeedback() {
-		return feedback;
+
+	public String getFeedbackComment() {
+		return feedbackComment;
 	}
-	public void setFeedback(String feedback) {
-		this.feedback = feedback;
+
+	public void setFeedbackComment(String feedbackComment) {
+		this.feedbackComment = feedbackComment;
 	}
 
 	@Override
 	public String toString() {
-		return "FeedBack [ratingId=" + ratingId + ", patient=" + patient + ", doctor=" + doctor + ", rating=" + rating
-				+ ", feedback=" + feedback + "]";
+		return "FeedBack [feedbackId=" + feedbackId + ", patient=" + patient + ", doctor=" + doctor + ", rating="
+				+ rating + ", feedbackComment=" + feedbackComment + "]";
 	}
 	
-	
-
 }
+	
+	

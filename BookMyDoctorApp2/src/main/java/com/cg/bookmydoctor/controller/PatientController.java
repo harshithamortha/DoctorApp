@@ -21,7 +21,7 @@ import com.cg.bookmydoctor.service.PatientServiceImpl;
 
 
 @RestController
-@RequestMapping("/Patients")
+@RequestMapping("/Patient")
 
 public class PatientController {
 	
@@ -43,7 +43,7 @@ public class PatientController {
 	}
 	
 	//working
-	@DeleteMapping("/removePatientDetails")
+	@DeleteMapping("/removePatient")
 	@ExceptionHandler(PatientException.class)
 	public Patient removePatientDetails(@RequestBody Patient bean) {
 		return PatientService.removePatientDetails(bean);
@@ -57,7 +57,7 @@ public class PatientController {
 	}
 
 	//working
-	@GetMapping("/allPatient")
+	@GetMapping("/getallPatients")
 	public List<Patient> getAllPatient() {
 		return PatientService.getAllPatient();
 	}

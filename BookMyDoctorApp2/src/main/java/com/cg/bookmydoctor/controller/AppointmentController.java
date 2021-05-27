@@ -1,13 +1,9 @@
 package com.cg.bookmydoctor.controller;
 
-import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,27 +13,26 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.cg.bookmydoctor.dto.Appointment;
 import com.cg.bookmydoctor.dto.Doctor;
 import com.cg.bookmydoctor.exception.AppointmentException;
 import com.cg.bookmydoctor.service.AppointmentServiceImpl;
 
 
-//@CrossOrigin("http://localhost:3500")
 @RestController
-@RequestMapping("/Appointments")
+@RequestMapping("/Appointment")
 public class AppointmentController {
-	@Autowired(required = true)
+	
+	@Autowired
 	AppointmentServiceImpl AppointmentService;
 
 	//working
-	@GetMapping("/AllAppointments")
+	@GetMapping("/getAllAppointments")
 	public List<Appointment> getAllAppointments() {
 		return AppointmentService.getAllAppointments();
 	}
 	
-	//working, input for doc and patient it is taking null
+	//working
 	@PostMapping("/addAppointment")
 	@ExceptionHandler(AppointmentException.class)
 	public Appointment addAppointment(@RequestBody Appointment app) {
@@ -45,9 +40,9 @@ public class AppointmentController {
 	}
 	
 	//working
-	@GetMapping("/getAppointment/{id}")
+	@GetMapping("/getAppointment/{AppointmentId}")
 	@ExceptionHandler(AppointmentException.class)
-	public Appointment getAppointment(@PathVariable("id") int AppointmentId) {
+	public Appointment getAppointment(@PathVariable("AppointmentId") int AppointmentId) {
 		return AppointmentService.getAppointment(AppointmentId);
 	}
 

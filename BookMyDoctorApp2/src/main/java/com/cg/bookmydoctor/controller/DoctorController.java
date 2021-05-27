@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.cg.bookmydoctor.dto.AvailabilityDates;
 import com.cg.bookmydoctor.dto.Doctor;
 import com.cg.bookmydoctor.exception.DoctorException;
 import com.cg.bookmydoctor.service.DoctorServiceImpl;
@@ -20,7 +22,8 @@ import com.cg.bookmydoctor.service.DoctorServiceImpl;
 @RestController
 @RequestMapping("/Doctor")
 public class DoctorController {
-	@Autowired(required = true)
+	
+	@Autowired
 	DoctorServiceImpl doctorService;
 
 	//working
@@ -31,7 +34,7 @@ public class DoctorController {
 	}
 
 	//working
-	@GetMapping("/allDoctors")
+	@GetMapping("/getallDoctors")
 	public List<Doctor> getDoctorList() {
 		return doctorService.getDoctorList();
 	}
@@ -59,23 +62,22 @@ public class DoctorController {
 	}
 	
 	//working
-	@GetMapping("/allDoctors/{speciality}")
+	@GetMapping("/getDoctors/{speciality}")
 	@ExceptionHandler(DoctorException.class)
 	public List<Doctor> getDoctorList(@PathVariable("speciality") String speciality) {
 		return doctorService.getDoctorList(speciality);
 	}
 	
 	
-	/*@PostMapping("/addAvailability")
+	@PostMapping("/addAvailability")
 	public boolean addAvailability(@RequestBody AvailabilityDates bean) {
 		return doctorService.addAvailability(bean);
 	}
 
 	@PostMapping("/updateAvailability")
-	public boolean updateAvailability(@RequestBody int availabilityId) {
-		return doctorService.updateAvailability(availabilityId);
+	public boolean updateAvailability(@RequestBody AvailabilityDates bean) {
+		return doctorService.updateAvailability(bean);
 	}
-*/
 	
 
 	

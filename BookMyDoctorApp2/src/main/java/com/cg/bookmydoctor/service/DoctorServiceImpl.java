@@ -9,16 +9,14 @@ import com.cg.bookmydoctor.dto.*;
 import com.cg.bookmydoctor.exception.DoctorException;
 import com.cg.bookmydoctor.dao.*;
 
-
 @Service
 public class DoctorServiceImpl implements IDoctorService {
 
 	@Autowired
 	IDoctorDao docDao;
 	Doctor doctor;
+
 	
-	//all the details doctors
-	//working
 	@Override
 	public List<Doctor> getDoctorList() {
 		Iterable<Doctor> result = docDao.findAll();
@@ -27,10 +25,8 @@ public class DoctorServiceImpl implements IDoctorService {
 		return resultList;
 	}
 	
-	//working
 	@Override
 	public Doctor addDoctor(Doctor dr) {
-		//Optional<Doctor> findById = docDao.findById(dr.getDoctorId());
 		if(dr == null) {
 			throw new DoctorException("Passed object can't be null");
 		} else {
@@ -38,11 +34,8 @@ public class DoctorServiceImpl implements IDoctorService {
 		}
 	}
 
-	//working
 	@Override
 	public Doctor updateDoctorProfile(Doctor bean) {
-		// TODO Auto-generated method stub
-		//Optional<Doctor> findById = docDao.findById(bean.getDoctorId());
 		if(bean == null) {
 			throw new DoctorException("Passed object can't be null");
 		} else {
@@ -50,12 +43,9 @@ public class DoctorServiceImpl implements IDoctorService {
 		}
 	}
 	
-	
-	//working
 	@Override
 	public Doctor removeDoctor(Doctor doc) {
 		Doctor dr = doc;
-		//Optional<Doctor> docdb = docDao.findById(doc.getDoctorId());
 		if(doc == null) {
 			throw new DoctorException("The passed object can't be null");
 
@@ -65,30 +55,12 @@ public class DoctorServiceImpl implements IDoctorService {
 		return dr;
 	}
 	
-	//working
 	public Doctor getDoctor(Doctor doc) {
 		Optional<Doctor> docdb = docDao.findById(doc.getDoctorId());
 			return docdb.get();
 		
 	}
 	
-	public boolean updateAvailability(int availabilityId) {
-		if(availabilityId > 0) {
-			//ad.setAvailabilityId(ad.getAvailabilityId());
-			ad.setDoctor(ad.getDoctor());
-			ad.setFromDate(ad.getFromDate());
-			ad.setToDate(ad.getToDate());
-			return true;		
-		} else {
-			return false;
-		}
-	}
-
-
-	private AvailabilityDates ad;
-
-	
-	//working
 	@Override
 	public List<Doctor> getDoctorList(String speciality) {
 		
@@ -102,7 +74,16 @@ public class DoctorServiceImpl implements IDoctorService {
 		return doclist;
 	}
 
+	@Override
+	public boolean updateAvailability(AvailabilityDates bean) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
-		
+	@Override
+	public boolean addAvailability(AvailabilityDates bean) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

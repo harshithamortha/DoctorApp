@@ -16,21 +16,25 @@ import com.cg.bookmydoctor.service.UserServiceImpl;
 @RestController
 @RequestMapping("/User")
 public class UserController {
+	
 	@Autowired
 	UserServiceImpl userService ;
-
+   
+	//working
 	@PostMapping("/addUser")
 	@ExceptionHandler(UserException.class)
 	public User addUser(@RequestBody User user) {
 		return userService.addUser(user);
 	}
-
+ 
+	//working
 	@PutMapping("/updateUser")
 	@ExceptionHandler(UserException.class)
 	public User updateUser(@RequestBody User user) {
 		return userService.updateUser(user);
 	}
 
+	//working
 	@DeleteMapping("/removeUser")
 	@ExceptionHandler(AdminException.class)
 	public User removeUser(@RequestBody User user) {

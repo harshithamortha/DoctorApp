@@ -33,18 +33,23 @@ public class Appointment {
 	private LocalDate appointmentDate;
 	
 	@Column(name="appointment_Status")
-	private String appointmentStatus;//approved ,cancelled,completed	
+	private String appointmentStatus;//approved ,cancelled,completed
+	
+	@Column(name="remark")
+	private String remark;
+	
 	
 	public Appointment() {}
 
 	public Appointment(int appointmentId, Doctor doctor, Patient patient, LocalDate appointmentDate,
-			String appointmentStatus) {
+			String appointmentStatus, String remark) {
 		super();
 		this.appointmentId = appointmentId;
 		this.doctor = doctor;
 		this.patient = patient;
 		this.appointmentDate = appointmentDate;
 		this.appointmentStatus = appointmentStatus;
+		this.remark = remark;
 	}
 
 	public int getAppointmentId() {
@@ -86,12 +91,21 @@ public class Appointment {
 	public void setAppointmentStatus(String appointmentStatus) {
 		this.appointmentStatus = appointmentStatus;
 	}
+	
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 
 	@Override
 	public String toString() {
 		return "Appointment [appointmentId=" + appointmentId + ", doctor=" + doctor + ", patient=" + patient
-				+ ", appointmentDate=" + appointmentDate + ", appointmentStatus=" + appointmentStatus + "]";
-	}	
+				+ ", appointmentDate=" + appointmentDate + ", appointmentStatus=" + appointmentStatus + ", remark="
+				+ remark + "]";
+	}
 	
 	
 }
