@@ -1,9 +1,5 @@
 package com.cg.bookmydoctor.service;
 
-
-
-
-
 import java.util.ArrayList;   
 import java.util.List;      
 import java.util.Optional;
@@ -20,7 +16,6 @@ public class DoctorServiceImpl implements IDoctorService {
 	@Autowired
 	IDoctorDao docDao;
 	Doctor doctor;
-	//IAvailabilityDao availDao;
 	
 	//all the details doctors
 	//working

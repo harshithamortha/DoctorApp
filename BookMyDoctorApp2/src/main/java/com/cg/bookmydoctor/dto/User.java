@@ -9,7 +9,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Users")
-
 public class User {
 
 	@Id
@@ -27,7 +26,9 @@ public class User {
 	private String role; // admin//doctor //patient
 	
 	
-	public User() {}
+	public User() {
+		
+	}
 	
 	
 	public User(int userId, String userName, String password, String role) {

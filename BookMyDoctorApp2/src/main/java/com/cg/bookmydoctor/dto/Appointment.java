@@ -21,11 +21,11 @@ public class Appointment {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int appointmentId;
 	
-	@OneToOne//(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "doctorId",referencedColumnName = "doctorId")
 	private Doctor doctor;
 	
-	@OneToOne//(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "patientId",referencedColumnName = "patientId")
 	private Patient patient;
 	
