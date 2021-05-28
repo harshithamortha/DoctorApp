@@ -57,7 +57,7 @@ public class DoctorController {
 	}
 	
 	//working
-	@GetMapping("/getdoctor/{speciality}")
+	@GetMapping("/getdoctors/{speciality}")
 	public List<Doctor> getDoctorList(@PathVariable("speciality") String speciality) {
 		return doctorService.getDoctorList(speciality);
 	}
@@ -69,7 +69,7 @@ public class DoctorController {
 	}
 	
     //working
-	@PostMapping("/updateavailability")
+	@PutMapping("/updateavailability")
 	public boolean updateAvailability(@RequestBody AvailabilityDates bean) {
 		return doctorService.updateAvailability(bean);
 	}

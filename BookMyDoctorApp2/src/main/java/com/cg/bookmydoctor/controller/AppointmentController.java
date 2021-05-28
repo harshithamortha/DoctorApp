@@ -35,14 +35,12 @@ public class AppointmentController {
 	
 	//working
 	@PostMapping("/addappointment")
-	@ExceptionHandler(AppointmentException.class)
 	public Appointment addAppointment(@RequestBody Appointment app) {
 		return AppointmentService.addAppointment(app);
 	}
 	
 	//working
 	@GetMapping("/getappointment/{appointmentId}")
-	@ExceptionHandler(AppointmentException.class)
 	public Appointment getAppointment(@PathVariable("appointmentId") int AppointmentId) {
 		return AppointmentService.getAppointment(AppointmentId);
 	}
@@ -50,7 +48,6 @@ public class AppointmentController {
 	
 	//working
 	@DeleteMapping("/deleteappointment/{id}")
-	@ExceptionHandler(AppointmentException.class)
 	public boolean deleteAppointment(@PathVariable("id") int AppointmentId) {
 		return AppointmentService.deleteAppointment(AppointmentId);
 	}
@@ -58,14 +55,12 @@ public class AppointmentController {
 	
 	//working
 	@PutMapping("/updateappointment")
-	@ExceptionHandler(AppointmentException.class)
 	public boolean updateAppointment(@RequestBody Appointment bean) {
 		return AppointmentService.updateAppointment(bean);
 	}
 	
 	
 	@GetMapping("/doctorbasedappointments/{id}")
-	@ExceptionHandler(AppointmentException.class)
 	public List<Appointment> getAppointments(@PathVariable("id")Doctor doc) {
 		return AppointmentService.getAppointments(doc);
 	}

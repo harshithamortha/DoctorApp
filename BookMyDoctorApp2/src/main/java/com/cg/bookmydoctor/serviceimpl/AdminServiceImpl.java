@@ -17,7 +17,7 @@ public class AdminServiceImpl implements IAdminService {
 
 	@Override
 	public Admin addAdmin(Admin admin) throws AdminException {
-		Optional<Admin> adminDb = this.adminDao.findById(admin.getAdminId());
+		Optional<Admin> adminDb = adminDao.findById(admin.getAdminId());
 		if(adminDb.isPresent()) {
 			throw new AdminException("Admin Already Exists :" + admin.getAdminId());
 		}
@@ -29,7 +29,7 @@ public class AdminServiceImpl implements IAdminService {
 	@Override
 	public Admin removeAdmin(Admin admin) throws AdminException {
 		Admin adm = admin;
-		Optional<Admin> adminDb = this.adminDao.findById(admin.getAdminId());
+		Optional<Admin> adminDb = adminDao.findById(admin.getAdminId());
 		if(!adminDb.isPresent()) {
 			throw new AdminException("admin with ID : " +admin.getAdminId()+" doesn't exist to delete");
 		}else {

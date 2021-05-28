@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.cg.bookmydoctor.dto.*;
 import com.cg.bookmydoctor.exception.AppointmentException;
+import com.cg.bookmydoctor.exception.UserException;
 import com.cg.bookmydoctor.service.IAppointmentService;
 import com.cg.bookmydoctor.dao.*;
 import java.time.LocalDate;
@@ -28,9 +29,11 @@ public class AppointmentServiceImpl implements IAppointmentService {
 		
 		@Override
 		public Appointment addAppointment(Appointment appointment) throws AppointmentException {
-			if(appointment == null) {
-				throw new AppointmentException("Passed object cannot be null");
-			} else {
+			Optional<Appointment> appointmentDb = appointmentDao.findById(appointment.getAppointmentId());
+			if(appointmentDb.isPresent()) {
+				throw new AppointmentException("Appointment data already exists with ID : " +appointment.getAppointmentId());
+			}
+			 else {
 				return appointmentDao.save(appointment);
 			}
 		}
@@ -56,12 +59,14 @@ public class AppointmentServiceImpl implements IAppointmentService {
 		}
 
 		@Override
-		public boolean updateAppointment(Appointment bean) throws AppointmentException{
-			if(bean == null) {
-				throw new AppointmentException("Passed object can't be null");
+		public boolean updateAppointment(Appointment bean) {
+			Optional<Appointment> appointmentDb = appointmentDao.findById(bean.getAppointmentId());
+			if(appointmentDb.isPresent()) {
+				 appointmentDao.save(bean);
+				return true;	
+
 			} else {
-				appointmentDao.save(bean);
-				return true;
+				return false;
 			}
 		}
 

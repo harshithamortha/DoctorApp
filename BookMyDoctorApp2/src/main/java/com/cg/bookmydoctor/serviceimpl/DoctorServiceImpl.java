@@ -76,7 +76,6 @@ public class DoctorServiceImpl implements IDoctorService {
 
 	@Override
 	public List<Doctor> getDoctorList(String speciality) throws DoctorException {
-
 		Optional<Doctor> findById = doctorDao.findBySpeciality(speciality);
 		List<Doctor> doclist = new ArrayList<>();
 		if (findById.isPresent()) {
@@ -90,8 +89,8 @@ public class DoctorServiceImpl implements IDoctorService {
 
 	public boolean addAvailability(AvailabilityDates availDates) {
 		if(availDates != null) {
-			Optional<AvailabilityDates> findById = availabilityDao.findById(availDates.getAvailabilityId());
-			if(!findById.isPresent()) {
+			Optional<AvailabilityDates> availabilityDb = availabilityDao.findById(availDates.getAvailabilityId());
+			if(!availabilityDb.isPresent()) {
 				availabilityDao.save(availDates);
 				return true;
 			}
@@ -101,8 +100,8 @@ public class DoctorServiceImpl implements IDoctorService {
 	}
 
 	public boolean updateAvailability(AvailabilityDates availDates) {
-		Optional<AvailabilityDates> findById = availabilityDao.findById(availDates.getAvailabilityId());
-		if(findById.isPresent()) {
+		Optional<AvailabilityDates> availabilityDb = availabilityDao.findById(availDates.getAvailabilityId());
+		if(availabilityDb.isPresent()) {
 			availabilityDao.save(availDates);
 			return true;	
 

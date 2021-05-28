@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 import com.cg.bookmydoctor.dto.*;
+import com.cg.bookmydoctor.exception.DoctorException;
 import com.cg.bookmydoctor.exception.PatientException;
 import com.cg.bookmydoctor.service.IPatientService;
 import com.cg.bookmydoctor.dao.IPatientDao;
@@ -25,9 +26,11 @@ public class PatientServiceImpl implements IPatientService {
 
 	@Override
 	public Patient addPatient(Patient bean) throws PatientException {
-		if(bean == null) {
-			throw new PatientException("Passed object can't be null");
-		} else {
+		Optional<Patient> patientdb= patientDao.findById(bean.getPatientId());
+		if(patientdb.isPresent()) {
+			throw new PatientException("Patient already exists with ID : " +bean.getPatientId());
+		}
+		 else {
 			return patientDao.save(bean);
 		}
 	}
@@ -35,40 +38,40 @@ public class PatientServiceImpl implements IPatientService {
 	@Override
 	public Patient editPatientProfile(Patient bean) throws PatientException{
 		Optional<Patient> patientDb = patientDao.findById(bean.getPatientId());
-		if (patientDb.isPresent()) {
-			patientDao.save(bean);
+		if (!patientDb.isPresent()) {
+			throw new PatientException(("Patient doesn't exist with ID : " +bean.getPatientId()));
 		} 
-		else
-			throw new PatientException("Patient with ID: " + bean.getPatientId() + "does not exists");
-		return bean;
-
+		else {
+			return patientDao.save(bean);
+		}
 	} 
 		
 	@Override
 	public Patient removePatientDetails(Patient bean) throws PatientException{
 		Patient Patient1 = bean;
-		Optional<Patient> docdb = patientDao.findById(bean.getPatientId());
-		if(docdb.isPresent()) {
-			patientDao.delete(bean);	
-		} else {
-			throw new PatientException("Record not Found");
+		Optional<Patient> patientDb = patientDao.findById(bean.getPatientId());
+		if (!patientDb.isPresent()) {
+			throw new PatientException("Patient with id : " +bean.getPatientId() +"doesn't exist to delete");
+		} 
+		else {
+			patientDao.deleteById(bean.getPatientId());	
 		}
 		return Patient1;
 	}
 	
 	@Override
 	public Patient getPatient(Patient patient) throws PatientException{
-		Optional<Patient> patientDb = this.patientDao.findById(patient.getPatientId());
+		Optional<Patient> patientDb = patientDao.findById(patient.getPatientId());
 		if(patientDb.isPresent()) {
 			return patientDb.get();
 		}
 		else {
-			throw new PatientException("Record not found with id : " + patient.getPatientId());
+			throw new PatientException("Patient with ID : " + patient.getPatientId()+" doesn't exist");
 		}
 	}
 	
 	@Override
-	public List<Patient> getAllPatient() throws PatientException{
+	public List<Patient> getAllPatient() {
 		Iterable<Patient> result = patientDao.findAll();
 		List<Patient> resultList = new ArrayList<>();
 		result.forEach(resultList :: add);
