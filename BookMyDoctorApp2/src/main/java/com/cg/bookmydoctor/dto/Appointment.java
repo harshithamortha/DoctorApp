@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
@@ -29,12 +32,15 @@ public class Appointment {
 	@JoinColumn(name = "patientId",referencedColumnName = "patientId")
 	private Patient patient;
 	
+	@DateTimeFormat(pattern = "yyyy-mm-dd")
 	@Column(name="appointment_Date")
 	private LocalDate appointmentDate;
 	
+	@NotBlank
 	@Column(name="appointment_Status")
 	private String appointmentStatus;//approved ,cancelled,completed
 	
+	@NotBlank
 	@Column(name="remark")
 	private String remark;
 	

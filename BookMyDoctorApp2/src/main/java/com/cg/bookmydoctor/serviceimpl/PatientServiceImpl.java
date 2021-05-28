@@ -1,10 +1,13 @@
-package com.cg.bookmydoctor.service;
+package com.cg.bookmydoctor.serviceimpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 import com.cg.bookmydoctor.dto.*;
 import com.cg.bookmydoctor.exception.PatientException;
+import com.cg.bookmydoctor.service.IPatientService;
 import com.cg.bookmydoctor.dao.IPatientDao;
+import com.cg.bookmydoctor.dao.IAppointmentDao;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,13 +18,13 @@ import java.util.Optional;
 public class PatientServiceImpl implements IPatientService {
 	@Autowired
 	private IPatientDao patientDao;
+	@Autowired
+	private IAppointmentDao appointmentDao;
 	
 	Appointment a;
 
 	@Override
-	//working
-	public Patient addPatient(Patient bean) {
-		//Optional<Doctor> findById = docDao.findById(dr.getDoctorId());
+	public Patient addPatient(Patient bean) throws PatientException {
 		if(bean == null) {
 			throw new PatientException("Passed object can't be null");
 		} else {
@@ -30,8 +33,7 @@ public class PatientServiceImpl implements IPatientService {
 	}
 
 	@Override
-	//working
-	public Patient editPatientProfile(Patient bean) {
+	public Patient editPatientProfile(Patient bean) throws PatientException{
 		Optional<Patient> patientDb = patientDao.findById(bean.getPatientId());
 		if (patientDb.isPresent()) {
 			patientDao.save(bean);
@@ -43,8 +45,7 @@ public class PatientServiceImpl implements IPatientService {
 	} 
 		
 	@Override
-	//working
-	public Patient removePatientDetails(Patient bean) {
+	public Patient removePatientDetails(Patient bean) throws PatientException{
 		Patient Patient1 = bean;
 		Optional<Patient> docdb = patientDao.findById(bean.getPatientId());
 		if(docdb.isPresent()) {
@@ -56,8 +57,7 @@ public class PatientServiceImpl implements IPatientService {
 	}
 	
 	@Override
-	//working
-	public Patient getPatient(Patient patient) {
+	public Patient getPatient(Patient patient) throws PatientException{
 		Optional<Patient> patientDb = this.patientDao.findById(patient.getPatientId());
 		if(patientDb.isPresent()) {
 			return patientDb.get();
@@ -68,8 +68,7 @@ public class PatientServiceImpl implements IPatientService {
 	}
 	
 	@Override
-	//working
-	public List<Patient> getAllPatient(){
+	public List<Patient> getAllPatient() throws PatientException{
 		Iterable<Patient> result = patientDao.findAll();
 		List<Patient> resultList = new ArrayList<>();
 		result.forEach(resultList :: add);

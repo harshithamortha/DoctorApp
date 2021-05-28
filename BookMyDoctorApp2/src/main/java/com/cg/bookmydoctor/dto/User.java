@@ -6,6 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "Users")
@@ -16,12 +19,16 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int userId;
 	
+	@Size(min = 3, max = 50)
+	@NotEmpty(message = "Username is required")
 	@Column(name="userName")
 	private String userName;
 	
+	@Size(min = 8, max = 15)
 	@Column(name="password")
 	private String password;
 	
+	@NotBlank
 	@Column(name="role")
 	private String role; // admin//doctor //patient
 	

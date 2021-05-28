@@ -1,9 +1,10 @@
-package com.cg.bookmydoctor.service;
+package com.cg.bookmydoctor.serviceimpl;
 
 import org.springframework.beans.factory.annotation.Autowired; 
 import org.springframework.stereotype.Service;
 import com.cg.bookmydoctor.dto.*;
 import com.cg.bookmydoctor.exception.AppointmentException;
+import com.cg.bookmydoctor.service.IAppointmentService;
 import com.cg.bookmydoctor.dao.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class AppointmentServiceImpl implements IAppointmentService {
 		
 		
 		@Override
-		public Appointment addAppointment(Appointment appointment) {
+		public Appointment addAppointment(Appointment appointment) throws AppointmentException {
 			if(appointment == null) {
 				throw new AppointmentException("Passed object cannot be null");
 			} else {
@@ -35,18 +36,18 @@ public class AppointmentServiceImpl implements IAppointmentService {
 		}
 
 		@Override
-		public Appointment getAppointment(int appointmentId) {
+		public Appointment getAppointment(int appointmentId) throws AppointmentException {
 	        Optional<Appointment> appointmentDb = this.appointmentDao.findById(appointmentId);
 			if(appointmentDb.isPresent()) {
 				return appointmentDb.get();
 			}else {
-				throw new AppointmentException("Record not found with id : " + appointmentId);
+				throw new AppointmentException("Record not found with id : " +appointmentId);
 			}
 		}
 		
 	    private Appointment appointment;
 		@Override
-		public boolean deleteAppointment(int appointmentId) {
+		public boolean deleteAppointment(int appointmentId) throws AppointmentException {
 			if(appointmentId > 0) {
 				appointmentDao.deleteById(appointmentId);
 				return true;		
@@ -55,7 +56,7 @@ public class AppointmentServiceImpl implements IAppointmentService {
 		}
 
 		@Override
-		public boolean updateAppointment(Appointment bean) {
+		public boolean updateAppointment(Appointment bean) throws AppointmentException{
 			if(bean == null) {
 				throw new AppointmentException("Passed object can't be null");
 			} else {
@@ -75,12 +76,7 @@ public class AppointmentServiceImpl implements IAppointmentService {
 
 		@Override
 		public List<Appointment> getAppointments(LocalDate date) {
-			LocalDate localDate = appointment.getAppointmentDate();
-			List<Appointment> appt  = new ArrayList<>();
-			if(localDate == date) {
-				appt.add(appointment);	
-			}
-			return appt;
+			return appointmentDao.findAllByAppointmentDate(date);
 		}
 
 }

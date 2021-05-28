@@ -7,6 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -18,15 +22,21 @@ public class Admin {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int adminId;
 	
+	@Size(min = 3, max = 50)
+	@NotEmpty(message = "Admin name is required")
 	@Column(name= "adminName")
 	private String adminName;
 	
+	@NotBlank
 	@Column(name="contactNumber")
 	private String contactNumber;
 	
+	@NotBlank
+	@Email(message = "Please enter a valid e-mail address")
 	@Column(name="email")
 	private String email;
 	
+	@Size(min = 8, max = 15)
 	@Column(name="password")
 	private String password;
 	

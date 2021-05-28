@@ -1,4 +1,4 @@
-package com.cg.bookmydoctor.service;
+package com.cg.bookmydoctor.serviceimpl;
 
 
 import java.util.List; 
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.cg.bookmydoctor.dao.IFeedbackDao;
 import com.cg.bookmydoctor.dto.*;
 import com.cg.bookmydoctor.exception.FeedBackException;
+import com.cg.bookmydoctor.service.IFeedbackService;
 
 @Service
 public class FeedbackServiceImpl implements IFeedbackService { 
@@ -18,23 +19,24 @@ public class FeedbackServiceImpl implements IFeedbackService {
 	FeedBack feedback;
 
 	@Override
-	public FeedBack addFeedback(FeedBack fdb) {
-		if(fdb != null) {
+	public FeedBack addFeedback(FeedBack fdb) throws FeedBackException {
+		Optional<FeedBack> findById = feedbackDao.findById(fdb.getFeedbackId());
+		if(!findById.isPresent()) {
 			return feedbackDao.save(fdb);
 		}  else {
-			throw new FeedBackException("Passed object is null");
+			throw new FeedBackException("Feedback with id : " +fdb.getFeedbackId()+ "already exists");
 		}
 
 	}
 
 	@Override
-	public FeedBack getFeedback(FeedBack fdb) {
+	public FeedBack getFeedback(FeedBack fdb) throws FeedBackException {
 		Optional<FeedBack> feedbackDb = this.feedbackDao.findById(fdb.getFeedbackId());
 		if(feedbackDb .isPresent()) {
 			return feedbackDb .get();
 		} 
 		else {
-			throw new FeedBackException("Record not found with id : " + fdb.getFeedbackId());
+			throw new FeedBackException("Feedback with ID :" + fdb.getFeedbackId()+"doesn't exist");
 		}
 
 	}

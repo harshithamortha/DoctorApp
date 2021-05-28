@@ -16,65 +16,60 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cg.bookmydoctor.dto.AvailabilityDates;
 import com.cg.bookmydoctor.dto.Doctor;
 import com.cg.bookmydoctor.exception.DoctorException;
-import com.cg.bookmydoctor.service.DoctorServiceImpl;
+import com.cg.bookmydoctor.serviceimpl.DoctorServiceImpl;
 
 
 @RestController
-@RequestMapping("/Doctor")
+@RequestMapping("/doctor")
 public class DoctorController {
 	
 	@Autowired
 	DoctorServiceImpl doctorService;
 
 	//working
-	@PostMapping("/addDoctor")
-	@ExceptionHandler(DoctorException.class)
+	@PostMapping("/adddoctor")
 	public Doctor addDoctor(@RequestBody Doctor doctor) {
 		return doctorService.addDoctor(doctor);
 	}
 
 	//working
-	@GetMapping("/getallDoctors")
+	@GetMapping("/getalldoctors")
 	public List<Doctor> getDoctorList() {
 		return doctorService.getDoctorList();
 	}
 
 	//working
-	@DeleteMapping("/removeDoctor")
-	@ExceptionHandler(DoctorException.class)
+	@DeleteMapping("/removedoctor")
 	public Doctor removeDoctor(@RequestBody Doctor doctor) {
 		return doctorService.removeDoctor(doctor);
 	}
 
 	//working
-	@PutMapping("/updateDoctor")
-	@ExceptionHandler(DoctorException.class)
+	@PutMapping("/updatedoctor")
 	public Doctor updateDoctorProfile(@RequestBody Doctor doctor) {
 		return doctorService.updateDoctorProfile(doctor);
 	}
-
 	
 	//working
-	@GetMapping("/getDoctor/{doctorId}")
-	//@ExceptionHandler(DoctorException.class)
+	@GetMapping("/getdoctor/{doctorId}")
 	public Doctor getDoctor(@PathVariable("doctorId") Doctor doc) {
 		return doctorService.getDoctor(doc);
 	}
 	
 	//working
-	@GetMapping("/getDoctors/{speciality}")
-	@ExceptionHandler(DoctorException.class)
+	@GetMapping("/getdoctor/{speciality}")
 	public List<Doctor> getDoctorList(@PathVariable("speciality") String speciality) {
 		return doctorService.getDoctorList(speciality);
 	}
 	
-	
-	@PostMapping("/addAvailability")
+	//working
+	@PostMapping("/addavailability")
 	public boolean addAvailability(@RequestBody AvailabilityDates bean) {
 		return doctorService.addAvailability(bean);
 	}
-
-	@PostMapping("/updateAvailability")
+	
+    //working
+	@PostMapping("/updateavailability")
 	public boolean updateAvailability(@RequestBody AvailabilityDates bean) {
 		return doctorService.updateAvailability(bean);
 	}

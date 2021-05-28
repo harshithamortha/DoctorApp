@@ -12,43 +12,44 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.cg.bookmydoctor.dto.Appointment;
 import com.cg.bookmydoctor.dto.Doctor;
 import com.cg.bookmydoctor.exception.AppointmentException;
-import com.cg.bookmydoctor.service.AppointmentServiceImpl;
+import com.cg.bookmydoctor.serviceimpl.AppointmentServiceImpl;
 
 
 @RestController
-@RequestMapping("/Appointment")
+@RequestMapping("/appointment")
 public class AppointmentController {
 	
 	@Autowired
 	AppointmentServiceImpl AppointmentService;
 
 	//working
-	@GetMapping("/getAllAppointments")
+	@GetMapping("/getallappointments")
 	public List<Appointment> getAllAppointments() {
 		return AppointmentService.getAllAppointments();
 	}
 	
 	//working
-	@PostMapping("/addAppointment")
+	@PostMapping("/addappointment")
 	@ExceptionHandler(AppointmentException.class)
 	public Appointment addAppointment(@RequestBody Appointment app) {
 		return AppointmentService.addAppointment(app);
 	}
 	
 	//working
-	@GetMapping("/getAppointment/{AppointmentId}")
+	@GetMapping("/getappointment/{appointmentId}")
 	@ExceptionHandler(AppointmentException.class)
-	public Appointment getAppointment(@PathVariable("AppointmentId") int AppointmentId) {
+	public Appointment getAppointment(@PathVariable("appointmentId") int AppointmentId) {
 		return AppointmentService.getAppointment(AppointmentId);
 	}
 
 	
 	//working
-	@DeleteMapping("/deleteAppointment/{id}")
+	@DeleteMapping("/deleteappointment/{id}")
 	@ExceptionHandler(AppointmentException.class)
 	public boolean deleteAppointment(@PathVariable("id") int AppointmentId) {
 		return AppointmentService.deleteAppointment(AppointmentId);
@@ -56,20 +57,23 @@ public class AppointmentController {
 	
 	
 	//working
-	@PutMapping("/updateAppointment")
+	@PutMapping("/updateappointment")
 	@ExceptionHandler(AppointmentException.class)
 	public boolean updateAppointment(@RequestBody Appointment bean) {
 		return AppointmentService.updateAppointment(bean);
 	}
 	
 	
-	@GetMapping("/DoctorBasedAppointments/{id}")
+	@GetMapping("/doctorbasedappointments/{id}")
+	@ExceptionHandler(AppointmentException.class)
 	public List<Appointment> getAppointments(@PathVariable("id")Doctor doc) {
 		return AppointmentService.getAppointments(doc);
 	}
 	
-	@GetMapping("/DateBasedAppointments")
-	public List<Appointment> getAppointments(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+	//working
+	@GetMapping("/datebasedappointments")
+	@ExceptionHandler(AppointmentException.class)
+	public List<Appointment> getAppointments(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam("appointmentDate") LocalDate date) {
 		return AppointmentService.getAppointments(date);
 	}
 	

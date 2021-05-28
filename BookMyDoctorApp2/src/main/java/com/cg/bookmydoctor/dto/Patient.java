@@ -1,47 +1,63 @@
 package com.cg.bookmydoctor.dto;
 
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 
 @Entity
 @Table(name = "Patient")
-public class Patient implements Serializable {
-
+public class Patient  {
 	
 	@Id
 	@Column(name = "patientId", unique=true)
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int patientId;
 	
+	@Size(min = 3, max = 50)
+	@NotEmpty(message = "Patient name is required")
 	@Column(name="patientName")
 	private String patientName;
 	
+	@NotBlank
 	@Column(name="mobileNo")
 	private String mobileNo;
 	
+	@NotBlank
+	@Email(message = "Please enter a valid e-mail address")
 	@Column(name="email")
 	private String email;
 	
+	@Size(min = 8, max = 15)
 	@Column(name="password")
 	private String password;
 	
+	@NotBlank
 	@Column(name="bloodGroup")
 	private String bloodGroup;
 	
+	@NotBlank
 	@Column(name="gender")
 	private String gender;
 	
+	@NotBlank
 	@Column(name="age")
 	private int age;
 	
+	@NotBlank
 	@Column(name="address")
 	private String address;
+	
+	/*@OneToOne(mappedBy = "patient")
+	private Appointment appointment;*/
 	
 	public Patient() {
 		
@@ -132,7 +148,7 @@ public class Patient implements Serializable {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Patient [patientId=" + patientId + ", patientName=" + patientName + ", mobileNo=" + mobileNo

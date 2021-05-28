@@ -2,6 +2,13 @@ package com.cg.bookmydoctor.dto;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,27 +23,37 @@ public class Doctor {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int doctorId;
 	
+	@Size(min = 3, max = 50)
+	@NotEmpty(message = "Doctor name is required")
 	@Column(name="doctorName")
 	private String doctorName;
 	
+	@NotBlank
 	@Column(name="speciality")
 	private String speciality;
 	
+	@NotBlank
 	@Column(name="location")
 	private String location;
 	
+	@NotBlank
 	@Column(name="hospitalName")
 	private String hospitalName;
 	
+	@NotBlank
 	@Column(name="mobileNo")
 	private String mobileNo;
 	
+	@NotBlank
 	@Column(name="email")
 	private String email;
 	
+	@NotBlank
 	@Column(name="password")
 	private String password;
 	
+	@DecimalMin(value = "500.0")
+	@DecimalMax(value = "5000.0")
 	@Column(name="chargesPerVisit")
 	private double chargesPerVisit;
 	

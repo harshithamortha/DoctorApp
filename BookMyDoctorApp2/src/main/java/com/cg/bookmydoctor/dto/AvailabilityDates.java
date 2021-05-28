@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 @Entity
 @Table(name = "AvailabilityDates")
@@ -28,9 +30,11 @@ public class AvailabilityDates implements Serializable{
 	@JoinColumn(name = "doctorId",referencedColumnName = "doctorId")
 	private Doctor doctor;
 	
+	@DateTimeFormat(pattern = "yyyy-mm-dd")
 	@Column(name="fromDate")
 	private LocalDate fromDate;
 	
+	@DateTimeFormat(pattern = "yyyy-mm-dd")
 	@Column(name="endDate")
 	private LocalDate endDate;
 
