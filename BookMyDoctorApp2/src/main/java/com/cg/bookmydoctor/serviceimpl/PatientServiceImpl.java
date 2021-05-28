@@ -1,15 +1,13 @@
 package com.cg.bookmydoctor.serviceimpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
-import com.cg.bookmydoctor.dto.*;
-import com.cg.bookmydoctor.exception.DoctorException;
+import com.cg.bookmydoctor.dto.Patient;
+import com.cg.bookmydoctor.dto.Appointment;
+import com.cg.bookmydoctor.dto.Doctor;
 import com.cg.bookmydoctor.exception.PatientException;
 import com.cg.bookmydoctor.service.IPatientService;
 import com.cg.bookmydoctor.dao.IPatientDao;
-import com.cg.bookmydoctor.dao.IAppointmentDao;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List; 
@@ -19,8 +17,6 @@ import java.util.Optional;
 public class PatientServiceImpl implements IPatientService {
 	@Autowired
 	private IPatientDao patientDao;
-	@Autowired
-	private IAppointmentDao appointmentDao;
 	
 	Appointment a;
 
@@ -39,7 +35,7 @@ public class PatientServiceImpl implements IPatientService {
 	public Patient editPatientProfile(Patient bean) throws PatientException{
 		Optional<Patient> patientDb = patientDao.findById(bean.getPatientId());
 		if (!patientDb.isPresent()) {
-			throw new PatientException(("Patient doesn't exist with ID : " +bean.getPatientId()));
+			throw new PatientException("Patient doesn't exist with ID : " +bean.getPatientId());
 		} 
 		else {
 			return patientDao.save(bean);

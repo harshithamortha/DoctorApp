@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.cg.bookmydoctor.dto.Appointment;
 import com.cg.bookmydoctor.dto.Doctor;
-import com.cg.bookmydoctor.exception.AppointmentException;
 import com.cg.bookmydoctor.serviceimpl.AppointmentServiceImpl;
 
 
@@ -25,51 +23,50 @@ import com.cg.bookmydoctor.serviceimpl.AppointmentServiceImpl;
 public class AppointmentController {
 	
 	@Autowired
-	AppointmentServiceImpl AppointmentService;
+	AppointmentServiceImpl appointmentService;
 
 	//working
 	@GetMapping("/getallappointments")
 	public List<Appointment> getAllAppointments() {
-		return AppointmentService.getAllAppointments();
+		return appointmentService.getAllAppointments();
 	}
 	
 	//working
 	@PostMapping("/addappointment")
 	public Appointment addAppointment(@RequestBody Appointment app) {
-		return AppointmentService.addAppointment(app);
+		return appointmentService.addAppointment(app);
 	}
 	
 	//working
 	@GetMapping("/getappointment/{appointmentId}")
-	public Appointment getAppointment(@PathVariable("appointmentId") int AppointmentId) {
-		return AppointmentService.getAppointment(AppointmentId);
+	public Appointment getAppointment(@PathVariable("appointmentId") int appointmentId) {
+		return appointmentService.getAppointment(appointmentId);
 	}
 
 	
 	//working
 	@DeleteMapping("/deleteappointment/{id}")
-	public boolean deleteAppointment(@PathVariable("id") int AppointmentId) {
-		return AppointmentService.deleteAppointment(AppointmentId);
+	public boolean deleteAppointment(@PathVariable("id") int appointmentId) {
+		return appointmentService.deleteAppointment(appointmentId);
 	}
 	
 	
 	//working
 	@PutMapping("/updateappointment")
 	public boolean updateAppointment(@RequestBody Appointment bean) {
-		return AppointmentService.updateAppointment(bean);
+		return appointmentService.updateAppointment(bean);
 	}
 	
 	
 	@GetMapping("/doctorbasedappointments/{id}")
 	public List<Appointment> getAppointments(@PathVariable("id")Doctor doc) {
-		return AppointmentService.getAppointments(doc);
+		return appointmentService.getAppointments(doc);
 	}
 	
 	//working
 	@GetMapping("/datebasedappointments")
-	@ExceptionHandler(AppointmentException.class)
 	public List<Appointment> getAppointments(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam("appointmentDate") LocalDate date) {
-		return AppointmentService.getAppointments(date);
+		return appointmentService.getAppointments(date);
 	}
 	
 }

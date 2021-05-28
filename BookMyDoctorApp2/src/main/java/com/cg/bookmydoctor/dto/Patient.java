@@ -48,7 +48,7 @@ public class Patient  {
 	@Column(name="gender")
 	private String gender;
 	
-	@NotBlank
+	//@NotEmpty
 	@Column(name="age")
 	private int age;
 	

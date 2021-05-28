@@ -25,28 +25,24 @@ public class AdminController {
 	
 	//working
    	@GetMapping("/viewadmin")
-   	@ExceptionHandler(AdminException.class)
 	public Admin viewAdmin(@RequestParam("adminId") Admin admin) {
 		return adminservice.viewAdmin(admin);
 	}
 
     //working
 	@PostMapping("/addadmin")
-	@ExceptionHandler(AdminException.class)
 	public Admin addAdmin(@RequestBody Admin admin) {
 		return adminservice.addAdmin(admin);
 	}
 
 	//working
 	@PutMapping("/updateadmin")
-	@ExceptionHandler(AdminException.class)
 	public Admin updateAdmin(@RequestBody Admin admin) {
 		return adminservice.updateAdmin(admin);
 	}
 
 	//working
 	@DeleteMapping("/removeadmin")
-	@ExceptionHandler(AdminException.class)
 	public Admin removeAdmin(@RequestBody Admin admin) {
 		return adminservice.removeAdmin(admin);
 	}

@@ -24,7 +24,7 @@ public class User {
 	@Column(name="userName")
 	private String userName;
 	
-	@Size(min = 8, max = 15)
+	@Size(min = 5, max = 15)
 	@Column(name="password")
 	private String password;
 	

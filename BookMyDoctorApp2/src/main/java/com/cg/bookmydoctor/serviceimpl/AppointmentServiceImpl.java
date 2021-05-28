@@ -26,7 +26,6 @@ public class AppointmentServiceImpl implements IAppointmentService {
 			return resultList;
 		}
 		
-		
 		@Override
 		public Appointment addAppointment(Appointment appointment) throws AppointmentException {
 			Optional<Appointment> appointmentDb = appointmentDao.findById(appointment.getAppointmentId());

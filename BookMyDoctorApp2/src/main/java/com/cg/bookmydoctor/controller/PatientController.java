@@ -19,50 +19,49 @@ import com.cg.bookmydoctor.serviceimpl.PatientServiceImpl;
 
 @RestController
 @RequestMapping("/patient")
-
 public class PatientController {
 	
 	@Autowired
-	PatientServiceImpl PatientService;
+	PatientServiceImpl patientService;
 
 	//working
 	@PostMapping("/addpatient")
 	public Patient addPatient(@RequestBody Patient bean) {
-		return PatientService.addPatient(bean);
+		return patientService.addPatient(bean);
 	}
 
 	//working
 	@PutMapping("/updatepatient")
 	public Patient editPatientProfile(@RequestBody Patient bean) {
-		return PatientService.editPatientProfile(bean);
+		return patientService.editPatientProfile(bean);
 	}
 	
 	//working
 	@DeleteMapping("/removepatient")
 	public Patient removePatientDetails(@RequestBody Patient bean) {
-		return PatientService.removePatientDetails(bean);
+		return patientService.removePatientDetails(bean);
 	}
 	
 	//working
 	@GetMapping("/getpatient")
-	public Patient getPatient(@RequestParam("patientId") Patient Patient) {
-		return PatientService.getPatient(Patient);
+	public Patient getPatient(@RequestParam("patientId") Patient patient) {
+		return patientService.getPatient(patient);
 	}
 
 	//working
 	@GetMapping("/getallpatients")
 	public List<Patient> getAllPatient() {
-		return PatientService.getAllPatient();
+		return patientService.getAllPatient();
 	}
 	
 	@GetMapping("/getallpatientbydoctor")
 	public List<Patient> getPatientListByDoctor(@RequestParam("doctorname") Doctor doc) {
-		return PatientService.getPatientListByDoctor(doc);
+		return patientService.getPatientListByDoctor(doc);
 	}
 	
 	
 	@GetMapping("/getallpatienbydate")
 	public List<Patient> getPatientListByDate(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam("appointmentdate")LocalDate appdate) {
-		return PatientService.getPatientListByDate(appdate);
+		return patientService.getPatientListByDate(appdate);
 	}
 }

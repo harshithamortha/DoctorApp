@@ -48,9 +48,13 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public User validateUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
+	public User getUser(User user) throws UserException {
+		Optional<User> userDb = userDao.findById(user.getUserId());
+		if(userDb.isPresent()) {
+			return userDb.get();
+		}else {
+			throw new UserException(" User doesn't exist with Id : " +user.getUserId());
+		} 
 	}
 
 }
