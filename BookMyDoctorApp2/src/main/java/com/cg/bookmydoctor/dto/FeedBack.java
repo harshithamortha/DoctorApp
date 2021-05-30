@@ -8,9 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "Feedback")
@@ -29,12 +26,9 @@ public class FeedBack {
 	@JoinColumn(name = "doctorId",referencedColumnName = "doctorId")
 	private Doctor doctor;
 	
-	@Min(value = 1)
-	@Max(value = 300)
 	@Column(name="rating")
 	private int rating;
 	
-	@NotBlank
 	@Column(name="feedbackComment")
 	private String feedbackComment;
 	

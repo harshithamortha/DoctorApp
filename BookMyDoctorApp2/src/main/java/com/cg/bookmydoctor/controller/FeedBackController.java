@@ -11,8 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cg.bookmydoctor.dto.Doctor;
 import com.cg.bookmydoctor.dto.FeedBack;
 import com.cg.bookmydoctor.exception.FeedBackException;
+import com.cg.bookmydoctor.exception.ValidateFeedBackException;
 import com.cg.bookmydoctor.serviceimpl.FeedbackServiceImpl;
 
+/**
+ * @author Shivani
+ *          REST Controller with different HTTP methods as GET,POST,DELETE and their respective URL mappings class level
+ *         request mapping as "feedback"       
+ */
    
 @RestController
 @RequestMapping("/feedback")
@@ -22,14 +28,14 @@ public class FeedBackController {
 	FeedbackServiceImpl feedbackService;
 
 
-	/*@GetMapping("/getallfeedback")
+	@GetMapping("/getallfeedback")
 	public List<FeedBack> getAllFeedBack(Doctor doctor) {
 		return feedbackService.getAllFeedback(doctor);
-	}*/
+	}
 
 	//working
 	@PostMapping("/addfeedback")
-	public FeedBack addFeedback(@RequestBody FeedBack feedback) throws FeedBackException {
+	public FeedBack addFeedback(@RequestBody FeedBack feedback) throws FeedBackException, ValidateFeedBackException {
 		return feedbackService.addFeedback(feedback);
 	}
 

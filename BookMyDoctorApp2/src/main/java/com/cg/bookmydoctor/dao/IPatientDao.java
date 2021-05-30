@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IPatientDao  extends JpaRepository<Patient, Integer> {
 	
-	//List<Appointment> findAllByAppointmentDate(LocalDate date);
 	
 
 }

@@ -1,21 +1,27 @@
 package com.cg.bookmydoctor.serviceimpl;
 
-import java.util.ArrayList;   
+import java.util.ArrayList;
+  
 import java.util.List;      
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.cg.bookmydoctor.dto.*;
+
+import com.cg.bookmydoctor.dto.AvailabilityDates;
+import com.cg.bookmydoctor.dto.Doctor;
+
 import com.cg.bookmydoctor.exception.DoctorException;
+import com.cg.bookmydoctor.exception.ValidateDoctorException;
 import com.cg.bookmydoctor.service.IDoctorService;
-import com.cg.bookmydoctor.dao.*;
+import com.cg.bookmydoctor.util.AllConstants;
+import com.cg.bookmydoctor.dao.IAvailabilityDao;
+import com.cg.bookmydoctor.dao.IDoctorDao;
 
 @Service
 public class DoctorServiceImpl implements IDoctorService {
 
 	@Autowired
 	IDoctorDao doctorDao;
-	Doctor doctor;
 	@Autowired
 	private IAvailabilityDao availabilityDao;
 	
@@ -29,7 +35,8 @@ public class DoctorServiceImpl implements IDoctorService {
 
 	
 	@Override
-	public Doctor addDoctor(Doctor dr) throws DoctorException {
+	public Doctor addDoctor(Doctor dr) throws DoctorException, ValidateDoctorException {
+		validateDoctor(dr);
 		Optional<Doctor>docdb= doctorDao.findById(dr.getDoctorId());
 		if(docdb.isPresent()) {
 			throw new DoctorException("Doctor object already exists with ID : " +dr.getDoctorId());
@@ -108,6 +115,30 @@ public class DoctorServiceImpl implements IDoctorService {
 		} else {
 			return false;
 		}
+	}
+	private boolean validateDoctor(Doctor doctor) throws ValidateDoctorException{
+		if(!doctor.getDoctorName().matches(AllConstants.NAME_PATTERN)){
+			throw new ValidateDoctorException(AllConstants.EMPTY_DOCTOR);
+		}
+		if(!doctor.getEmail().matches(AllConstants.EMAIL_PATTERN)) {
+			throw new ValidateDoctorException(AllConstants.EMAIL_CANNOT_BE_EMPTY);
+		}
+		if(!doctor.getHospitalName().matches(AllConstants.NAME_PATTERN)) {
+			throw new ValidateDoctorException(AllConstants.EMPTY_HOSPITALNAME);
+		}
+		if(!doctor.getLocation().matches(AllConstants.NAME_PATTERN)) {
+			throw new ValidateDoctorException(AllConstants.EMPTY_LOCATION);
+		}
+		if(!doctor.getMobileNo().matches(AllConstants.PHONENUMBER_PATTERN)) {
+			throw new ValidateDoctorException(AllConstants.EMPTY_PHONENUMBER);
+		}
+		if(!doctor.getPassword().matches(AllConstants.PASSWORD_PATTERN)) {
+			throw new ValidateDoctorException(AllConstants.PASSWORD_NOT_STRONG);
+		}
+		if(!doctor.getSpeciality().matches(AllConstants.NAME_PATTERN)) {
+			throw new ValidateDoctorException(AllConstants.EMPTY_SPECIALITY);
+		}
+		return true;
 	}
 
 }

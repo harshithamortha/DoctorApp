@@ -8,13 +8,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.cg.bookmydoctor.dto.User;
-import com.cg.bookmydoctor.exception.PatientException;
 import com.cg.bookmydoctor.exception.UserException;
+import com.cg.bookmydoctor.exception.ValidateUserException;
 import com.cg.bookmydoctor.serviceimpl.UserServiceImpl;
 
+/**
+ * @author Samyuktha
+ *         REST Controller with different HTTP methods as GET,POST,DELETE and their respective URL mappings class level
+ *         request mapping as "user"       
+ */
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -24,7 +28,7 @@ public class UserController {
    
 	//working
 	@PostMapping("/adduser")
-	public User addUser(@RequestBody User user) throws UserException {
+	public User addUser(@RequestBody User user) throws UserException, ValidateUserException {
 		return userService.addUser(user);
 	}
  

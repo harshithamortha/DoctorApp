@@ -1,7 +1,6 @@
 package com.cg.bookmydoctor.dto;
 
 import java.time.LocalDate;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,8 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 
@@ -36,11 +33,10 @@ public class Appointment {
 	@Column(name="appointment_Date")
 	private LocalDate appointmentDate;
 	
-	@NotBlank
+	
 	@Column(name="appointment_Status")
 	private String appointmentStatus;//approved ,cancelled,completed
 	
-	@NotBlank
 	@Column(name="remark")
 	private String remark;
 	

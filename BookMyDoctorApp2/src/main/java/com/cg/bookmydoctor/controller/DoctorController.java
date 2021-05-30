@@ -13,9 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cg.bookmydoctor.dto.AvailabilityDates;
 import com.cg.bookmydoctor.dto.Doctor;
 import com.cg.bookmydoctor.exception.DoctorException;
+import com.cg.bookmydoctor.exception.ValidateDoctorException;
 import com.cg.bookmydoctor.serviceimpl.DoctorServiceImpl;
 
-
+/**
+ * @author SaiPriya 
+ *         REST Controller with different HTTP methods as GET,POST,DELETE and their respective URL mappings class level
+ *         request mapping as "doctor"       
+ */
 @RestController
 @RequestMapping("/doctor")
 public class DoctorController {
@@ -25,7 +30,7 @@ public class DoctorController {
 
 	//working
 	@PostMapping("/adddoctor")
-	public Doctor addDoctor(@RequestBody Doctor doctor) throws DoctorException {
+	public Doctor addDoctor(@RequestBody Doctor doctor) throws DoctorException, ValidateDoctorException {
 		return doctorService.addDoctor(doctor);
 	}
 

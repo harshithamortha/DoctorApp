@@ -16,9 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cg.bookmydoctor.dto.Appointment;
 import com.cg.bookmydoctor.dto.Doctor;
 import com.cg.bookmydoctor.exception.AppointmentException;
+import com.cg.bookmydoctor.exception.ValidateAppointmentException;
 import com.cg.bookmydoctor.serviceimpl.AppointmentServiceImpl;
 
-
+/**
+ * @author Ruchitha 
+ *         REST Controller with different HTTP methods as GET,POST,DELETE and their respective URL mappings class level
+ *         request mapping as "appointment"       
+ */
 @RestController
 @RequestMapping("/appointment")
 public class AppointmentController {
@@ -34,7 +39,7 @@ public class AppointmentController {
 	
 	//working
 	@PostMapping("/addappointment")
-	public Appointment addAppointment(@RequestBody Appointment app) throws AppointmentException {
+	public Appointment addAppointment(@RequestBody Appointment app) throws AppointmentException, ValidateAppointmentException {
 		return appointmentService.addAppointment(app);
 	}
 	
@@ -53,7 +58,7 @@ public class AppointmentController {
 	
 	//working
 	@PutMapping("/updateappointment")
-	public boolean updateAppointment(@RequestBody Appointment bean) throws AppointmentException {
+	public boolean updateAppointment(@RequestBody Appointment bean) {
 		return appointmentService.updateAppointment(bean);
 	}
 	
