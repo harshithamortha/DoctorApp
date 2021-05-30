@@ -1,20 +1,10 @@
 package com.cg.bookmydoctor.exception;
 
-public class UserException  extends RuntimeException{
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	String message;
+public class UserException  extends Exception{
+	public UserException() {
+		super();		
+	}
 	public UserException(String message) {
-		this.message = message;
+		super(message);
 	}
-	
-	@Override
-	public String getMessage() {
-		return message;
-		
-	}
-
 }

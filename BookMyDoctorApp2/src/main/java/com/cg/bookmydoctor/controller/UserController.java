@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.cg.bookmydoctor.dto.User;
+import com.cg.bookmydoctor.exception.PatientException;
+import com.cg.bookmydoctor.exception.UserException;
 import com.cg.bookmydoctor.serviceimpl.UserServiceImpl;
 
 @RestController
@@ -22,25 +24,25 @@ public class UserController {
    
 	//working
 	@PostMapping("/adduser")
-	public User addUser(@RequestBody User user) {
+	public User addUser(@RequestBody User user) throws UserException {
 		return userService.addUser(user);
 	}
  
 	//working
 	@PutMapping("/updateuser")
-	public User updateUser(@RequestBody User user) {
+	public User updateUser(@RequestBody User user) throws UserException {
 		return userService.updateUser(user);
 	}
 
 	//working
 	@DeleteMapping("/removeuser")
-	public User removeUser(@RequestBody User user) {
+	public User removeUser(@RequestBody User user)  throws UserException{
 		return userService.removeUser(user);
 	}
 	
 	//working
 	@GetMapping("/getuser/{userId}")
-	public User getUser(@PathVariable("userId") User user) {
+	public User getUser(@PathVariable("userId") User user) throws UserException {
 		return userService.getUser(user);
 	}
 }

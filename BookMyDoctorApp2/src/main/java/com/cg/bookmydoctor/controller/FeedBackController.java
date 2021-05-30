@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.cg.bookmydoctor.dto.Doctor;
 import com.cg.bookmydoctor.dto.FeedBack;
+import com.cg.bookmydoctor.exception.FeedBackException;
 import com.cg.bookmydoctor.serviceimpl.FeedbackServiceImpl;
 
    
@@ -21,20 +22,20 @@ public class FeedBackController {
 	FeedbackServiceImpl feedbackService;
 
 
-	@GetMapping("/getallfeedback")
+	/*@GetMapping("/getallfeedback")
 	public List<FeedBack> getAllFeedBack(Doctor doctor) {
 		return feedbackService.getAllFeedback(doctor);
-	}
+	}*/
 
 	//working
 	@PostMapping("/addfeedback")
-	public FeedBack addFeedback(@RequestBody FeedBack feedback) {
+	public FeedBack addFeedback(@RequestBody FeedBack feedback) throws FeedBackException {
 		return feedbackService.addFeedback(feedback);
 	}
 
 	//working
 	@GetMapping("/getfeedback")
-	public FeedBack getFeedback(@RequestParam("feedbackid") FeedBack fdb) {
+	public FeedBack getFeedback(@RequestParam("feedbackid") FeedBack fdb) throws FeedBackException {
 		return feedbackService.getFeedback(fdb);
 	}
 	

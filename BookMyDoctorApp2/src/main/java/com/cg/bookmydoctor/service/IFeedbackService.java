@@ -4,12 +4,13 @@ import java.util.List;
 
 import com.cg.bookmydoctor.dto.Doctor;
 import com.cg.bookmydoctor.dto.FeedBack;
+import com.cg.bookmydoctor.exception.FeedBackException;
 
 public interface IFeedbackService {
 
-	public FeedBack addFeedback(FeedBack fdb);
-	public FeedBack getFeedback(FeedBack fdb);
-	public List<FeedBack> getAllFeedback(Doctor doc);
+	public FeedBack addFeedback(FeedBack fdb) throws FeedBackException;
+	public FeedBack getFeedback(FeedBack fdb) throws FeedBackException;
+	//public List<FeedBack> getAllFeedback(Doctor doc);
 	
 	
 }

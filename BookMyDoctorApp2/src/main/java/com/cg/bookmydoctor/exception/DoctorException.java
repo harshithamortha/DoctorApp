@@ -1,20 +1,12 @@
 package com.cg.bookmydoctor.exception;
 
-public class DoctorException extends RuntimeException {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	String message;
-
-	public DoctorException(String message) {
-		super();
-		this.message = message;
+public class DoctorException extends Exception{
+	public DoctorException() {
+		super();		
 	}
-
-	@Override
-	public String getMessage() {
-		return message;
-
+	public DoctorException(String message) {
+		super(message);
 	}
 }
+
+

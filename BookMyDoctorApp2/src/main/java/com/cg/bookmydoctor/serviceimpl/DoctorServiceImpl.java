@@ -76,10 +76,10 @@ public class DoctorServiceImpl implements IDoctorService {
 
 	@Override
 	public List<Doctor> getDoctorList(String speciality) throws DoctorException {
-		Optional<Doctor> findById = doctorDao.findBySpeciality(speciality);
+		Optional<Doctor> doctorDb = doctorDao.findBySpeciality(speciality);
 		List<Doctor> doclist = new ArrayList<>();
-		if (findById.isPresent()) {
-			doclist.add(findById.get());
+		if (doctorDb .isPresent()) {
+			doclist.add(doctorDb .get());
 		} else
 			throw new DoctorException("Doctor with the speciality : " + speciality + "not exists");
 

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.cg.bookmydoctor.dto.Doctor;
 import com.cg.bookmydoctor.dto.Patient;
+import com.cg.bookmydoctor.exception.PatientException;
 import com.cg.bookmydoctor.serviceimpl.PatientServiceImpl;
 
 
@@ -26,25 +27,25 @@ public class PatientController {
 
 	//working
 	@PostMapping("/addpatient")
-	public Patient addPatient(@RequestBody Patient bean) {
+	public Patient addPatient(@RequestBody Patient bean) throws PatientException {
 		return patientService.addPatient(bean);
 	}
 
 	//working
 	@PutMapping("/updatepatient")
-	public Patient editPatientProfile(@RequestBody Patient bean) {
+	public Patient editPatientProfile(@RequestBody Patient bean) throws PatientException {
 		return patientService.editPatientProfile(bean);
 	}
 	
 	//working
 	@DeleteMapping("/removepatient")
-	public Patient removePatientDetails(@RequestBody Patient bean) {
+	public Patient removePatientDetails(@RequestBody Patient bean) throws PatientException {
 		return patientService.removePatientDetails(bean);
 	}
 	
 	//working
 	@GetMapping("/getpatient")
-	public Patient getPatient(@RequestParam("patientId") Patient patient) {
+	public Patient getPatient(@RequestParam("patientId") Patient patient) throws PatientException {
 		return patientService.getPatient(patient);
 	}
 

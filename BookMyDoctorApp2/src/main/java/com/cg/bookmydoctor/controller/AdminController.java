@@ -1,9 +1,7 @@
 package com.cg.bookmydoctor.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.cg.bookmydoctor.dto.Admin;
 import com.cg.bookmydoctor.exception.AdminException;
+import com.cg.bookmydoctor.exception.ValidateAdminException;
 import com.cg.bookmydoctor.serviceimpl.AdminServiceImpl;
 
 @RestController
@@ -24,26 +23,26 @@ public class AdminController {
 	AdminServiceImpl adminservice ;
 	
 	//working
-   	@GetMapping("/viewadmin")
-	public Admin viewAdmin(@RequestParam("adminId") Admin admin) {
+   	@GetMapping("/viewadmin/{adminId}")
+	public Admin viewAdmin(@PathVariable("adminId") final Admin admin) throws AdminException {
 		return adminservice.viewAdmin(admin);
 	}
 
     //working
 	@PostMapping("/addadmin")
-	public Admin addAdmin(@RequestBody Admin admin) {
+	public Admin addAdmin(@RequestBody final Admin admin) throws AdminException,ValidateAdminException {
 		return adminservice.addAdmin(admin);
 	}
 
 	//working
 	@PutMapping("/updateadmin")
-	public Admin updateAdmin(@RequestBody Admin admin) {
+	public Admin updateAdmin(@RequestBody final Admin admin) throws AdminException {
 		return adminservice.updateAdmin(admin);
 	}
 
 	//working
 	@DeleteMapping("/removeadmin")
-	public Admin removeAdmin(@RequestBody Admin admin) {
+	public Admin removeAdmin(@RequestBody final Admin admin) throws AdminException {
 		return adminservice.removeAdmin(admin);
 	}
 }

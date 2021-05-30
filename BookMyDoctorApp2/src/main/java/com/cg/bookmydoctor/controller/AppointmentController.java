@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.cg.bookmydoctor.dto.Appointment;
 import com.cg.bookmydoctor.dto.Doctor;
+import com.cg.bookmydoctor.exception.AppointmentException;
 import com.cg.bookmydoctor.serviceimpl.AppointmentServiceImpl;
 
 
@@ -33,27 +34,26 @@ public class AppointmentController {
 	
 	//working
 	@PostMapping("/addappointment")
-	public Appointment addAppointment(@RequestBody Appointment app) {
+	public Appointment addAppointment(@RequestBody Appointment app) throws AppointmentException {
 		return appointmentService.addAppointment(app);
 	}
 	
 	//working
 	@GetMapping("/getappointment/{appointmentId}")
-	public Appointment getAppointment(@PathVariable("appointmentId") int appointmentId) {
+	public Appointment getAppointment(@PathVariable("appointmentId") int appointmentId) throws AppointmentException {
 		return appointmentService.getAppointment(appointmentId);
 	}
 
 	
 	//working
 	@DeleteMapping("/deleteappointment/{id}")
-	public boolean deleteAppointment(@PathVariable("id") int appointmentId) {
+	public boolean deleteAppointment(@PathVariable("id") int appointmentId) throws AppointmentException {
 		return appointmentService.deleteAppointment(appointmentId);
 	}
 	
-	
 	//working
 	@PutMapping("/updateappointment")
-	public boolean updateAppointment(@RequestBody Appointment bean) {
+	public boolean updateAppointment(@RequestBody Appointment bean) throws AppointmentException {
 		return appointmentService.updateAppointment(bean);
 	}
 	
@@ -65,7 +65,8 @@ public class AppointmentController {
 	
 	//working
 	@GetMapping("/datebasedappointments")
-	public List<Appointment> getAppointments(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam("appointmentDate") LocalDate date) {
+	public List<Appointment> getAppointments(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) 
+	@RequestParam("appointmentDate") LocalDate date){
 		return appointmentService.getAppointments(date);
 	}
 	

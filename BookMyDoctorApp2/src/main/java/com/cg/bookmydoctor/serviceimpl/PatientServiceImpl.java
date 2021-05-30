@@ -44,7 +44,7 @@ public class PatientServiceImpl implements IPatientService {
 		
 	@Override
 	public Patient removePatientDetails(Patient bean) throws PatientException{
-		Patient Patient1 = bean;
+		Patient oldpatient = bean;
 		Optional<Patient> patientDb = patientDao.findById(bean.getPatientId());
 		if (!patientDb.isPresent()) {
 			throw new PatientException("Patient with id : " +bean.getPatientId() +"doesn't exist to delete");
@@ -52,7 +52,7 @@ public class PatientServiceImpl implements IPatientService {
 		else {
 			patientDao.deleteById(bean.getPatientId());	
 		}
-		return Patient1;
+		return oldpatient;
 	}
 	
 	@Override

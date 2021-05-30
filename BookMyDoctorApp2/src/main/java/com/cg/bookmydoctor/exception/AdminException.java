@@ -1,17 +1,11 @@
 package com.cg.bookmydoctor.exception;
 
-public class AdminException extends RuntimeException{
-	private static final long serialVersionUID = 1L;
-	String message;
 
-	public AdminException(String message) {
-		super();
-		this.message = message;
+public class AdminException extends Exception{
+	public AdminException() {
+		super();		
 	}
-
-	@Override
-	public String getMessage() {
-		return message;
-
+	public AdminException(String message) {
+		super(message);
 	}
 }
