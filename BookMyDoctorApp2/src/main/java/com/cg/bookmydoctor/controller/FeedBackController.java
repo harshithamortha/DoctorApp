@@ -16,7 +16,8 @@ import com.cg.bookmydoctor.serviceimpl.FeedbackServiceImpl;
 
 /**
  * @author Shivani
- *          REST Controller with different HTTP methods as GET,POST,DELETE and their respective URL mappings class level
+ *          REST Controller with different HTTP methods 
+ *          as GET,POST,DELETE and their respective URL mappings class level
  *         request mapping as "feedback"       
  */
    

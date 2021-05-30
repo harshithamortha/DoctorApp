@@ -23,8 +23,8 @@ public class FeedbackServiceImpl implements IFeedbackService {
 	@Override
 	public FeedBack addFeedback(FeedBack fdb) throws FeedBackException, ValidateFeedBackException {
 		validateFeedBack(fdb);
-		Optional<FeedBack> findById = feedbackDao.findById(fdb.getFeedbackId());
-		if(!findById.isPresent()) {
+		Optional<FeedBack> feedbackDb= feedbackDao.findById(fdb.getFeedbackId());
+		if(!feedbackDb.isPresent()) {
 			return feedbackDao.save(fdb);
 		}  else {
 			throw new FeedBackException("Feedback with id : " +fdb.getFeedbackId()+ "already exists");
@@ -47,10 +47,12 @@ public class FeedbackServiceImpl implements IFeedbackService {
 	
 	
 	private boolean validateFeedBack(FeedBack feedback) throws ValidateFeedBackException{
-		if(!(feedback.getRating() >=1) && !(feedback.getRating() <=5))
+		if(feedback.getRating() < 1 && feedback.getRating() > 5) {
 			throw new ValidateFeedBackException(AllConstants.INVALID_RATING);
-		if(!feedback.getFeedbackComment().matches(AllConstants.NAME_PATTERN))
+		}
+		if(!feedback.getFeedbackComment().matches(AllConstants.NAME_PATTERN)) {
 			throw new ValidateFeedBackException(AllConstants.EMPTY_COMMENT);
+		}
 		return true;
 	}
 

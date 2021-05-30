@@ -1,13 +1,13 @@
 package com.cg.bookmydoctor.serviceimpl;
 
 import org.springframework.beans.factory.annotation.Autowired; 
-
-
 import org.springframework.stereotype.Service;
 import com.cg.bookmydoctor.dto.Appointment;
 import com.cg.bookmydoctor.dto.Doctor;
 import com.cg.bookmydoctor.exception.AppointmentException;
 import com.cg.bookmydoctor.exception.ValidateAppointmentException;
+import com.cg.bookmydoctor.exception.ValidateDoctorException;
+import com.cg.bookmydoctor.exception.ValidatePatientException;
 import com.cg.bookmydoctor.service.IAppointmentService;
 import com.cg.bookmydoctor.util.AllConstants;
 import com.cg.bookmydoctor.dao.IAppointmentDao;
@@ -22,6 +22,7 @@ public class AppointmentServiceImpl implements IAppointmentService {
 		@Autowired
 		private IAppointmentDao appointmentDao;
 		
+		
 		@Override
 		public List<Appointment> getAllAppointments() {
 			Iterable<Appointment> result = appointmentDao.findAll();
@@ -31,7 +32,7 @@ public class AppointmentServiceImpl implements IAppointmentService {
 		}
 		
 		@Override
-		public Appointment addAppointment(Appointment appointment) throws AppointmentException, ValidateAppointmentException {
+		public Appointment addAppointment(Appointment appointment) throws AppointmentException, ValidateAppointmentException, ValidateDoctorException, ValidatePatientException {
 			validateAppointment(appointment);
 			Optional<Appointment> appointmentDb = appointmentDao.findById(appointment.getAppointmentId());
 			if(appointmentDb.isPresent()) {
@@ -41,6 +42,7 @@ public class AppointmentServiceImpl implements IAppointmentService {
 				return appointmentDao.save(appointment);
 			}
 		}
+
 
 		@Override
 		public Appointment getAppointment(int appointmentId) throws AppointmentException {
@@ -88,14 +90,18 @@ public class AppointmentServiceImpl implements IAppointmentService {
 			return appointmentDao.findAllByAppointmentDate(date);
 		}
 		
-		private boolean validateAppointment(Appointment appointment) throws ValidateAppointmentException{
-			if (!appointment.getAppointmentStatus().matches("Approved") && !appointment.getAppointmentStatus().matches("Cancelled")&&!appointment.getAppointmentStatus().matches("Completed"))
+		private boolean validateAppointment(Appointment appointment) throws ValidateAppointmentException, ValidateDoctorException, ValidatePatientException{
+			if (!appointment.getAppointmentStatus().matches("Approved") && !appointment.getAppointmentStatus().matches("Cancelled")
+					&&!appointment.getAppointmentStatus().matches("Completed")) {
 				throw new ValidateAppointmentException(AllConstants.STATUS_INVALID);
-			if (!appointment.getRemark().matches(AllConstants.NAME_PATTERN))
+			}
+			if (!appointment.getRemark().matches(AllConstants.NAME_PATTERN)) {
 				throw new ValidateAppointmentException(AllConstants.EMPTY_REMARK);
+			}
 			return true;
 		}
 
+		
 		
 
 }

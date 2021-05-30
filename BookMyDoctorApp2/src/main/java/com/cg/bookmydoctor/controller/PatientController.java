@@ -20,7 +20,8 @@ import com.cg.bookmydoctor.serviceimpl.PatientServiceImpl;
 
 /**
  * @author Priya Joshi
- *         REST Controller with different HTTP methods as GET,POST,DELETE and their respective URL mappings class level
+ *         REST Controller with different HTTP methods 
+ *         as GET,POST,DELETE and their respective URL mappings class level
  *         request mapping as "patient"       
  */
 @RestController

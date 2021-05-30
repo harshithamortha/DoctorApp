@@ -21,7 +21,7 @@ public class PatientServiceImpl implements IPatientService {
 	@Autowired
 	private IPatientDao patientDao;
 	
-	Appointment a;
+	Appointment appointment;
 
 	@Override
 	public Patient addPatient(Patient bean) throws PatientException, ValidatePatientException {
@@ -98,7 +98,7 @@ public class PatientServiceImpl implements IPatientService {
 		return p1;
 	}
 	
-	private boolean validatePatient(Patient patient) throws ValidatePatientException{
+	public boolean validatePatient(Patient patient) throws ValidatePatientException{
 		if(!patient.getPatientName().matches(AllConstants.NAME_PATTERN)){
 			throw new ValidatePatientException(AllConstants.EMPTY_PATIENT);
 		}
@@ -117,7 +117,7 @@ public class PatientServiceImpl implements IPatientService {
 		if(!patient.getPassword().matches(AllConstants.PASSWORD_PATTERN)) {
 			throw new ValidatePatientException(AllConstants.PASSWORD_NOT_STRONG);
 		}
-		if(!(patient.getAge() >= 0) && !(patient.getAge()<=100)) {
+		if(patient.getAge() < 0 && patient.getAge() > 100) {
 			throw new ValidatePatientException(AllConstants.INVALID_AGE);
 		}
 		return true;

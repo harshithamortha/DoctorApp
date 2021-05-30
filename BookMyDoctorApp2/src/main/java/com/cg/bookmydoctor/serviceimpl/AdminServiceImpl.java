@@ -65,14 +65,18 @@ public class AdminServiceImpl implements IAdminService {
 	}
 	
 	private boolean validateAdmin(Admin admin) throws ValidateAdminException{
-		if (!admin.getAdminName().matches(AllConstants.NAME_PATTERN) )
+		if (!admin.getAdminName().matches(AllConstants.NAME_PATTERN)) {
 			throw new ValidateAdminException(AllConstants.ADMIN_CANNOT_BE_EMPTY);
-		if (!admin.getContactNumber().matches(AllConstants.PASSWORD_PATTERN)) 
+		}
+		if (!admin.getContactNumber().matches(AllConstants.PHONENUMBER_PATTERN)) {
 			throw new ValidateAdminException(AllConstants.EMPTY_PHONENUMBER);
-		if (!admin.getEmail().matches(AllConstants.EMAIL_PATTERN))
+		}
+		if (!admin.getEmail().matches(AllConstants.EMAIL_PATTERN)) {
 			throw new ValidateAdminException(AllConstants.EMAIL_CANNOT_BE_EMPTY);
-		if (!admin.getPassword().matches(AllConstants.PASSWORD_PATTERN))
+		}
+		if (!admin.getPassword().matches(AllConstants.PASSWORD_PATTERN)) {
 			throw new ValidateAdminException(AllConstants.PASSWORD_NOT_STRONG);
+		}
 		return true;
 		
 	}

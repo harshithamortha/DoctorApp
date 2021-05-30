@@ -63,12 +63,15 @@ public class UserServiceImpl implements IUserService {
 	}
 	
 	public boolean validateUser(User user) throws ValidateUserException {
-		if (!user.getUserName().matches(AllConstants.USERNAME_PATTERN))
+		if (!user.getUserName().matches(AllConstants.USERNAME_PATTERN)) {
 			throw new ValidateUserException(AllConstants.USER_CANNOT_BE_EMPTY);
-		if (!user.getPassword().matches(AllConstants.PASSWORD_PATTERN))
+		}
+		if (!user.getPassword().matches(AllConstants.PASSWORD_PATTERN)) {
 			throw new ValidateUserException(AllConstants.PASSWORD_NOT_STRONG);
-		if (!user.getRole().matches("Admin") && !user.getRole().matches("Doctor") && !user.getRole().matches("Patient"))
+		}
+		if (!user.getRole().matches("Admin") && !user.getRole().matches("Doctor") && !user.getRole().matches("Patient")) {
 			throw new ValidateUserException(AllConstants.ROLE_INVALID);
+		}
 		return true;
 	}
 

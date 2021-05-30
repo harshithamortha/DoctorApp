@@ -46,7 +46,7 @@ public class DoctorServiceImpl implements IDoctorService {
 	}
 
 	@Override
-	public Doctor updateDoctorProfile(Doctor bean) throws DoctorException {
+	public Doctor updateDoctorProfile(final Doctor bean) throws DoctorException {
 		Optional<Doctor>docdb = doctorDao.findById(bean.getDoctorId());
 		if(!docdb.isPresent()) {
 			throw new DoctorException("Doctor doesn't exist with ID : " +bean.getDoctorId());
@@ -57,11 +57,11 @@ public class DoctorServiceImpl implements IDoctorService {
 
 
 	@Override
-	public Doctor removeDoctor(Doctor doc) throws DoctorException {
+	public Doctor removeDoctor(final Doctor doc) throws DoctorException {
 		Doctor doctor = doc;
 		Optional<Doctor> docdb = doctorDao.findById(doc.getDoctorId());
 		if(!docdb.isPresent()) {
-			throw new DoctorException("Doctor with id : " +doc.getDoctorId() +"doesn't exist to delete");
+			throw new DoctorException("Doctor with id : " +doc.getDoctorId() +" doesn't exist to delete");
 
 		} else {
 			doctorDao.deleteById(doc.getDoctorId());	
@@ -70,7 +70,7 @@ public class DoctorServiceImpl implements IDoctorService {
 	}
 
 
-	public Doctor getDoctor(Doctor doc) throws DoctorException {
+	public Doctor getDoctor(final Doctor doc) throws DoctorException {
 		Optional<Doctor> docdb = doctorDao.findById(doc.getDoctorId());
 		if(docdb.isPresent()) {
 			return docdb.get();
@@ -87,9 +87,9 @@ public class DoctorServiceImpl implements IDoctorService {
 		List<Doctor> doclist = new ArrayList<>();
 		if (doctorDb .isPresent()) {
 			doclist.add(doctorDb .get());
-		} else
+		} else {
 			throw new DoctorException("Doctor with the speciality : " + speciality + "not exists");
-
+		}
 		return doclist;
 	}
 

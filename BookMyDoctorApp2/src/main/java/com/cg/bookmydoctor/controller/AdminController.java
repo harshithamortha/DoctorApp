@@ -17,7 +17,8 @@ import com.cg.bookmydoctor.serviceimpl.AdminServiceImpl;
 
 /**
  * @author Harshitha 
- *         REST Controller with different HTTP methods as GET,POST,DELETE and their respective URL mappings class level
+ *         REST Controller with different HTTP methods 
+ *         as GET,POST,DELETE and their respective URL mappings class level
  *         request mapping as "admin"
  *         
  */

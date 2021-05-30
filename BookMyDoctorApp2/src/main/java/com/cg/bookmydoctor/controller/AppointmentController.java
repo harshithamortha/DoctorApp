@@ -17,11 +17,14 @@ import com.cg.bookmydoctor.dto.Appointment;
 import com.cg.bookmydoctor.dto.Doctor;
 import com.cg.bookmydoctor.exception.AppointmentException;
 import com.cg.bookmydoctor.exception.ValidateAppointmentException;
+import com.cg.bookmydoctor.exception.ValidateDoctorException;
+import com.cg.bookmydoctor.exception.ValidatePatientException;
 import com.cg.bookmydoctor.serviceimpl.AppointmentServiceImpl;
 
 /**
  * @author Ruchitha 
- *         REST Controller with different HTTP methods as GET,POST,DELETE and their respective URL mappings class level
+ *         REST Controller with different HTTP methods 
+ *         as GET,POST,DELETE and their respective URL mappings class level
  *         request mapping as "appointment"       
  */
 @RestController
@@ -39,7 +42,7 @@ public class AppointmentController {
 	
 	//working
 	@PostMapping("/addappointment")
-	public Appointment addAppointment(@RequestBody Appointment app) throws AppointmentException, ValidateAppointmentException {
+	public Appointment addAppointment(@RequestBody Appointment app) throws AppointmentException, ValidateAppointmentException, ValidateDoctorException, ValidatePatientException {
 		return appointmentService.addAppointment(app);
 	}
 	
