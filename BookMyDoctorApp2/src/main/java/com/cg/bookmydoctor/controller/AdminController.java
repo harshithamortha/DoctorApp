@@ -27,7 +27,7 @@ import com.cg.bookmydoctor.serviceimpl.AdminServiceImpl;
 public class AdminController {
 	
 	@Autowired
-	AdminServiceImpl adminservice ;
+	private AdminServiceImpl adminservice ;
 	
 	//working
    	@GetMapping("/viewadmin/{adminId}")
@@ -43,7 +43,7 @@ public class AdminController {
 
 	//working
 	@PutMapping("/updateadmin")
-	public Admin updateAdmin(@RequestBody final Admin admin) throws AdminException {
+	public Admin updateAdmin(@RequestBody final Admin admin) throws AdminException, ValidateAdminException {
 		return adminservice.updateAdmin(admin);
 	}
 

@@ -1,6 +1,5 @@
 package com.cg.bookmydoctor.serviceimpl;
-
-     
+ 
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +10,7 @@ import com.cg.bookmydoctor.service.IAdminService;
 import com.cg.bookmydoctor.util.AllConstants;
 import com.cg.bookmydoctor.dao.IAdminDao;
 
+
 @Service
 public class AdminServiceImpl implements IAdminService {
 	
@@ -18,7 +18,7 @@ public class AdminServiceImpl implements IAdminService {
 	private IAdminDao adminDao;
 
 	@Override
-	public Admin addAdmin(Admin admin) throws AdminException,ValidateAdminException {
+	public Admin addAdmin(final Admin admin) throws AdminException,ValidateAdminException {
 		validateAdmin(admin);
 		Optional<Admin> adminDb = adminDao.findById(admin.getAdminId());
 		if(adminDb.isPresent()) {
@@ -30,7 +30,7 @@ public class AdminServiceImpl implements IAdminService {
 	}
 
 	@Override
-	public Admin removeAdmin(Admin admin) throws AdminException {
+	public Admin removeAdmin(final Admin admin) throws AdminException {
 		Admin adm = admin;
 		Optional<Admin> adminDb = adminDao.findById(admin.getAdminId());
 		if(!adminDb.isPresent()) {
@@ -42,7 +42,7 @@ public class AdminServiceImpl implements IAdminService {
 	}
 
 	@Override
-	public Admin viewAdmin(Admin admin) throws AdminException{
+	public Admin viewAdmin(final Admin admin) throws AdminException{
 		Optional<Admin> adminDb = adminDao.findById(admin.getAdminId());
 		if(adminDb.isPresent()) {
 			return adminDb.get();
@@ -54,7 +54,8 @@ public class AdminServiceImpl implements IAdminService {
 	}
 
 	@Override
-	public Admin updateAdmin(Admin admin) throws AdminException {
+	public Admin updateAdmin(final Admin admin) throws AdminException, ValidateAdminException {
+		validateAdmin(admin);
 		Optional<Admin> adminDb = adminDao.findById(admin.getAdminId());
 		if(!adminDb.isPresent()) {
 			throw new AdminException("Admin doesn't exists with ID:" + admin.getAdminId());
@@ -64,7 +65,8 @@ public class AdminServiceImpl implements IAdminService {
 		}	
 	}
 	
-	private boolean validateAdmin(Admin admin) throws ValidateAdminException{
+	
+	private boolean validateAdmin(final Admin admin) throws ValidateAdminException{
 		if (!admin.getAdminName().matches(AllConstants.NAME_PATTERN)) {
 			throw new ValidateAdminException(AllConstants.ADMIN_CANNOT_BE_EMPTY);
 		}

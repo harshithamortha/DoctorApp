@@ -9,9 +9,9 @@ import com.cg.bookmydoctor.exception.ValidateFeedBackException;
 
 public interface IFeedbackService {
 
-	public FeedBack addFeedback(FeedBack fdb) throws FeedBackException, ValidateFeedBackException;
-	public FeedBack getFeedback(FeedBack fdb) throws FeedBackException;
-	public List<FeedBack> getAllFeedback(Doctor doc);
+	FeedBack addFeedback(FeedBack fdb) throws FeedBackException, ValidateFeedBackException;
+	FeedBack getFeedback(FeedBack fdb) throws FeedBackException;
+	List<FeedBack> getAllFeedback(Doctor doc);
 	
 	
 }

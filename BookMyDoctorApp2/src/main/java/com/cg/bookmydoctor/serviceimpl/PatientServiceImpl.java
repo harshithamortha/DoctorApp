@@ -21,7 +21,7 @@ public class PatientServiceImpl implements IPatientService {
 	@Autowired
 	private IPatientDao patientDao;
 	
-	Appointment appointment;
+	private Appointment appointment;
 
 	@Override
 	public Patient addPatient(Patient bean) throws PatientException, ValidatePatientException {
@@ -36,7 +36,8 @@ public class PatientServiceImpl implements IPatientService {
 	}
 
 	@Override
-	public Patient editPatientProfile(Patient bean) throws PatientException{
+	public Patient editPatientProfile(Patient bean) throws PatientException, ValidatePatientException{
+		validatePatient(bean);
 		Optional<Patient> patientDb = patientDao.findById(bean.getPatientId());
 		if (!patientDb.isPresent()) {
 			throw new PatientException("Patient doesn't exist with ID : " +bean.getPatientId());
@@ -82,23 +83,22 @@ public class PatientServiceImpl implements IPatientService {
 	public List<Patient> getPatientListByDoctor(Doctor doctor){
 		String docname = doctor.getDoctorName();
 		List<Patient> pat = new ArrayList<>();
-		if(a.getDoctor().getDoctorName().equals(docname)) {
-			pat.add(a.getPatient());
+		if(appointment.getDoctor().getDoctorName().equals(docname)) {
+			pat.add(appointment.getPatient());
 		}
 		return pat;
 	}
 	
 	@Override
 	public List<Patient> getPatientListByDate(LocalDate appdate){
-		List<Patient> p1 = new ArrayList<>();
-		LocalDate localDate = a.getAppointmentDate();
-		if(localDate == appdate) {
-			p1.add(a.getPatient());
+		List<Patient> patient = new ArrayList<>();
+		if(appdate.equals(appointment.getAppointmentDate())) {
+			patient.add(appointment.getPatient());
 		}
-		return p1;
+		return patient;
 	}
 	
-	public boolean validatePatient(Patient patient) throws ValidatePatientException{
+	private boolean validatePatient(Patient patient) throws ValidatePatientException{
 		if(!patient.getPatientName().matches(AllConstants.NAME_PATTERN)){
 			throw new ValidatePatientException(AllConstants.EMPTY_PATIENT);
 		}
@@ -117,7 +117,7 @@ public class PatientServiceImpl implements IPatientService {
 		if(!patient.getPassword().matches(AllConstants.PASSWORD_PATTERN)) {
 			throw new ValidatePatientException(AllConstants.PASSWORD_NOT_STRONG);
 		}
-		if(patient.getAge() < 0 && patient.getAge() > 100) {
+		if(patient.getAge() < 0) {
 			throw new ValidatePatientException(AllConstants.INVALID_AGE);
 		}
 		return true;

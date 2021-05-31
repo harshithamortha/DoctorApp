@@ -21,7 +21,7 @@ import com.cg.bookmydoctor.dao.IDoctorDao;
 public class DoctorServiceImpl implements IDoctorService {
 
 	@Autowired
-	IDoctorDao doctorDao;
+	private IDoctorDao doctorDao;
 	@Autowired
 	private IAvailabilityDao availabilityDao;
 	
@@ -35,18 +35,19 @@ public class DoctorServiceImpl implements IDoctorService {
 
 	
 	@Override
-	public Doctor addDoctor(Doctor dr) throws DoctorException, ValidateDoctorException {
-		validateDoctor(dr);
-		Optional<Doctor>docdb= doctorDao.findById(dr.getDoctorId());
+	public Doctor addDoctor(Doctor doctor) throws DoctorException, ValidateDoctorException {
+		validateDoctor(doctor);
+		Optional<Doctor>docdb= doctorDao.findById(doctor.getDoctorId());
 		if(docdb.isPresent()) {
-			throw new DoctorException("Doctor object already exists with ID : " +dr.getDoctorId());
+			throw new DoctorException("Doctor object already exists with ID : " +doctor.getDoctorId());
 		} else {
-			return doctorDao.save(dr);
+			return doctorDao.save(doctor);
 		}
 	}
 
 	@Override
-	public Doctor updateDoctorProfile(final Doctor bean) throws DoctorException {
+	public Doctor updateDoctorProfile(final Doctor bean) throws DoctorException, ValidateDoctorException {
+		validateDoctor(bean);
 		Optional<Doctor>docdb = doctorDao.findById(bean.getDoctorId());
 		if(!docdb.isPresent()) {
 			throw new DoctorException("Doctor doesn't exist with ID : " +bean.getDoctorId());
@@ -69,7 +70,7 @@ public class DoctorServiceImpl implements IDoctorService {
 		return doctor;
 	}
 
-
+	@Override
 	public Doctor getDoctor(final Doctor doc) throws DoctorException {
 		Optional<Doctor> docdb = doctorDao.findById(doc.getDoctorId());
 		if(docdb.isPresent()) {
@@ -93,7 +94,7 @@ public class DoctorServiceImpl implements IDoctorService {
 		return doclist;
 	}
 
-
+	@Override
 	public boolean addAvailability(AvailabilityDates availDates) {
 		if(availDates != null) {
 			Optional<AvailabilityDates> availabilityDb = availabilityDao.findById(availDates.getAvailabilityId());
@@ -101,11 +102,11 @@ public class DoctorServiceImpl implements IDoctorService {
 				availabilityDao.save(availDates);
 				return true;
 			}
-
 		}	
 		return false;
 	}
-
+	
+    @Override
 	public boolean updateAvailability(AvailabilityDates availDates) {
 		Optional<AvailabilityDates> availabilityDb = availabilityDao.findById(availDates.getAvailabilityId());
 		if(availabilityDb.isPresent()) {
@@ -116,6 +117,7 @@ public class DoctorServiceImpl implements IDoctorService {
 			return false;
 		}
 	}
+    
 	private boolean validateDoctor(Doctor doctor) throws ValidateDoctorException{
 		if(!doctor.getDoctorName().matches(AllConstants.NAME_PATTERN)){
 			throw new ValidateDoctorException(AllConstants.EMPTY_DOCTOR);

@@ -1,6 +1,7 @@
 package com.cg.bookmydoctor.controller;
 
 import java.time.LocalDate;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -17,8 +18,6 @@ import com.cg.bookmydoctor.dto.Appointment;
 import com.cg.bookmydoctor.dto.Doctor;
 import com.cg.bookmydoctor.exception.AppointmentException;
 import com.cg.bookmydoctor.exception.ValidateAppointmentException;
-import com.cg.bookmydoctor.exception.ValidateDoctorException;
-import com.cg.bookmydoctor.exception.ValidatePatientException;
 import com.cg.bookmydoctor.serviceimpl.AppointmentServiceImpl;
 
 /**
@@ -32,7 +31,7 @@ import com.cg.bookmydoctor.serviceimpl.AppointmentServiceImpl;
 public class AppointmentController {
 	
 	@Autowired
-	AppointmentServiceImpl appointmentService;
+	private AppointmentServiceImpl appointmentService;
 
 	//working
 	@GetMapping("/getallappointments")
@@ -42,7 +41,7 @@ public class AppointmentController {
 	
 	//working
 	@PostMapping("/addappointment")
-	public Appointment addAppointment(@RequestBody Appointment app) throws AppointmentException, ValidateAppointmentException, ValidateDoctorException, ValidatePatientException {
+	public Appointment addAppointment(@RequestBody Appointment app) throws AppointmentException, ValidateAppointmentException{
 		return appointmentService.addAppointment(app);
 	}
 	
@@ -61,7 +60,7 @@ public class AppointmentController {
 	
 	//working
 	@PutMapping("/updateappointment")
-	public boolean updateAppointment(@RequestBody Appointment bean) {
+	public boolean updateAppointment(@RequestBody Appointment bean) throws ValidateAppointmentException {
 		return appointmentService.updateAppointment(bean);
 	}
 	

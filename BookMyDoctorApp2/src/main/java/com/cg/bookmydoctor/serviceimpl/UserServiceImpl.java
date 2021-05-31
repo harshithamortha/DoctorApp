@@ -31,7 +31,8 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public User updateUser(User user) throws UserException {
+	public User updateUser(User user) throws UserException, ValidateUserException {
+		validateUser(user);
 		Optional<User> userDb = userDao.findById(user.getUserId());
 		if(!userDb.isPresent()) {
 			throw new UserException(" User doesn't exists with ID : " +user.getUserId());

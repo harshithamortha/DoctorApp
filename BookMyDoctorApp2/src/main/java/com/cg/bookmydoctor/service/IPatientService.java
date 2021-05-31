@@ -9,13 +9,13 @@ import com.cg.bookmydoctor.exception.ValidatePatientException;
 
 public interface IPatientService {
 
-	public Patient addPatient(Patient bean) throws PatientException, ValidatePatientException;
-	public Patient editPatientProfile(Patient bean) throws PatientException;
-	public Patient removePatientDetails(Patient bean) throws PatientException;
-	public Patient getPatient(Patient patient) throws PatientException;
-	public List<Patient> getAllPatient() throws PatientException;
-	public List<Patient> getPatientListByDoctor(Doctor doctor) throws PatientException;
-	public List<Patient> getPatientListByDate(LocalDate appdate) throws PatientException;
+	Patient addPatient(Patient bean) throws PatientException, ValidatePatientException;
+	Patient editPatientProfile(Patient bean) throws PatientException, ValidatePatientException;
+	Patient removePatientDetails(Patient bean) throws PatientException;
+	Patient getPatient(Patient patient) throws PatientException;
+	List<Patient> getAllPatient() throws PatientException;
+	List<Patient> getPatientListByDoctor(Doctor doctor) throws PatientException;
+	List<Patient> getPatientListByDate(LocalDate appdate) throws PatientException;
 	
 	
 }

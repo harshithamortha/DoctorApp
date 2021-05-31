@@ -6,8 +6,6 @@ import com.cg.bookmydoctor.dto.Appointment;
 import com.cg.bookmydoctor.dto.Doctor;
 import com.cg.bookmydoctor.exception.AppointmentException;
 import com.cg.bookmydoctor.exception.ValidateAppointmentException;
-import com.cg.bookmydoctor.exception.ValidateDoctorException;
-import com.cg.bookmydoctor.exception.ValidatePatientException;
 import com.cg.bookmydoctor.service.IAppointmentService;
 import com.cg.bookmydoctor.util.AllConstants;
 import com.cg.bookmydoctor.dao.IAppointmentDao;
@@ -32,7 +30,7 @@ public class AppointmentServiceImpl implements IAppointmentService {
 		}
 		
 		@Override
-		public Appointment addAppointment(Appointment appointment) throws AppointmentException, ValidateAppointmentException, ValidateDoctorException, ValidatePatientException {
+		public Appointment addAppointment(Appointment appointment) throws AppointmentException, ValidateAppointmentException {
 			validateAppointment(appointment);
 			Optional<Appointment> appointmentDb = appointmentDao.findById(appointment.getAppointmentId());
 			if(appointmentDb.isPresent()) {
@@ -56,7 +54,7 @@ public class AppointmentServiceImpl implements IAppointmentService {
 		
 	    private Appointment appointment;
 		@Override
-		public boolean deleteAppointment(int appointmentId) throws AppointmentException {
+		public boolean deleteAppointment(int appointmentId){
 			if(appointmentId > 0) {
 				appointmentDao.deleteById(appointmentId);
 				return true;		
@@ -65,7 +63,8 @@ public class AppointmentServiceImpl implements IAppointmentService {
 		}
 
 		@Override
-		public boolean updateAppointment(Appointment bean) {
+		public boolean updateAppointment(Appointment bean) throws ValidateAppointmentException {
+			validateAppointment(bean);
 			Optional<Appointment> appointmentDb = appointmentDao.findById(bean.getAppointmentId());
 			if(appointmentDb.isPresent()) {
 				 appointmentDao.save(bean);
@@ -90,7 +89,7 @@ public class AppointmentServiceImpl implements IAppointmentService {
 			return appointmentDao.findAllByAppointmentDate(date);
 		}
 		
-		private boolean validateAppointment(Appointment appointment) throws ValidateAppointmentException, ValidateDoctorException, ValidatePatientException{
+		private boolean validateAppointment(Appointment appointment) throws ValidateAppointmentException{
 			if (!appointment.getAppointmentStatus().matches("Approved") && !appointment.getAppointmentStatus().matches("Cancelled")
 					&&!appointment.getAppointmentStatus().matches("Completed")) {
 				throw new ValidateAppointmentException(AllConstants.STATUS_INVALID);
@@ -100,8 +99,4 @@ public class AppointmentServiceImpl implements IAppointmentService {
 			}
 			return true;
 		}
-
-		
-		
-
 }

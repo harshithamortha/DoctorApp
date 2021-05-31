@@ -8,12 +8,12 @@ import com.cg.bookmydoctor.exception.ValidateDoctorException;
 
 public interface IDoctorService {
 
-	public Doctor addDoctor(Doctor bean) throws DoctorException, ValidateDoctorException;
-	public Doctor updateDoctorProfile(Doctor bean) throws DoctorException;
-	public boolean addAvailability(AvailabilityDates bean) throws DoctorException;
-	public boolean updateAvailability(AvailabilityDates bean) throws DoctorException;
-	public Doctor getDoctor(Doctor doc) throws DoctorException;
-	public Doctor removeDoctor(Doctor doc) throws DoctorException;
-	public List<Doctor> getDoctorList() throws DoctorException;
-	public List<Doctor> getDoctorList(String speciality) throws DoctorException;
+	Doctor addDoctor(Doctor bean) throws DoctorException, ValidateDoctorException;
+	Doctor updateDoctorProfile(Doctor bean) throws DoctorException, ValidateDoctorException;
+	boolean addAvailability(AvailabilityDates bean) throws DoctorException;
+	boolean updateAvailability(AvailabilityDates bean) throws DoctorException;
+	Doctor getDoctor(Doctor doc) throws DoctorException;
+	Doctor removeDoctor(Doctor doc) throws DoctorException;
+	List<Doctor> getDoctorList() throws DoctorException;
+	List<Doctor> getDoctorList(String speciality) throws DoctorException;
 }

@@ -12,13 +12,13 @@ import com.cg.bookmydoctor.exception.ValidatePatientException;
 
 public interface IAppointmentService {
 	
-	public List<Appointment> getAllAppointments() throws AppointmentException;
-	public Appointment getAppointment(int appointmentId) throws AppointmentException;
-	public boolean deleteAppointment(int appointmentId) throws AppointmentException;
-	public boolean updateAppointment(Appointment bean) throws AppointmentException;
-	public List<Appointment> getAppointments(Doctor doc) throws AppointmentException;
-	public List<Appointment> getAppointments(LocalDate date) throws AppointmentException;
-	public Appointment addAppointment(Appointment app) throws AppointmentException, ValidateAppointmentException, ValidateDoctorException, ValidatePatientException;
+	List<Appointment> getAllAppointments() throws AppointmentException;
+	Appointment getAppointment(int appointmentId) throws AppointmentException;
+	boolean deleteAppointment(int appointmentId) ;
+	boolean updateAppointment(Appointment bean) throws AppointmentException, ValidateAppointmentException;
+	List<Appointment> getAppointments(Doctor doc) throws AppointmentException;
+	List<Appointment> getAppointments(LocalDate date) throws AppointmentException;
+	Appointment addAppointment(Appointment app) throws AppointmentException, ValidateAppointmentException, ValidateDoctorException, ValidatePatientException;
 	
 
 }

@@ -19,7 +19,7 @@ import com.cg.bookmydoctor.exception.ValidatePatientException;
 import com.cg.bookmydoctor.serviceimpl.PatientServiceImpl;
 
 /**
- * @author Priya Joshi
+ * @author PriyaJoshi,Shivani
  *         REST Controller with different HTTP methods 
  *         as GET,POST,DELETE and their respective URL mappings class level
  *         request mapping as "patient"       
@@ -29,7 +29,7 @@ import com.cg.bookmydoctor.serviceimpl.PatientServiceImpl;
 public class PatientController {
 	
 	@Autowired
-	PatientServiceImpl patientService;
+	private PatientServiceImpl patientService;
 
 	//working
 	@PostMapping("/addpatient")
@@ -39,7 +39,7 @@ public class PatientController {
 
 	//working
 	@PutMapping("/updatepatient")
-	public Patient editPatientProfile(@RequestBody Patient bean) throws PatientException {
+	public Patient editPatientProfile(@RequestBody Patient bean) throws PatientException, ValidatePatientException {
 		return patientService.editPatientProfile(bean);
 	}
 	

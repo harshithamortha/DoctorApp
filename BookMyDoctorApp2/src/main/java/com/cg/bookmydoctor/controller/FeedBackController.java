@@ -15,7 +15,7 @@ import com.cg.bookmydoctor.exception.ValidateFeedBackException;
 import com.cg.bookmydoctor.serviceimpl.FeedbackServiceImpl;
 
 /**
- * @author Shivani
+ * @author Samyuktha
  *          REST Controller with different HTTP methods 
  *          as GET,POST,DELETE and their respective URL mappings class level
  *         request mapping as "feedback"       
@@ -26,7 +26,7 @@ import com.cg.bookmydoctor.serviceimpl.FeedbackServiceImpl;
 public class FeedBackController {
 	
 	@Autowired
-	FeedbackServiceImpl feedbackService;
+	private FeedbackServiceImpl feedbackService;
 
 
 	@GetMapping("/getallfeedback")

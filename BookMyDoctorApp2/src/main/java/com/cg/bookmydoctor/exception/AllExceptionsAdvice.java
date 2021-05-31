@@ -33,17 +33,6 @@ public class AllExceptionsAdvice {
 		return new ErrorMessage(exception.getMessage(),HttpStatus.BAD_REQUEST.toString());
 	}
 	
-	@ExceptionHandler(AvailabilityException.class)
-	@ResponseStatus(HttpStatus.NOT_FOUND)
-	public ErrorMessage handleAvailabilityException(AvailabilityException exception) {
-		return new ErrorMessage(exception.getMessage(),HttpStatus.NOT_FOUND.toString());
-	}
-	
-	@ExceptionHandler(ValidateAvailabilityException.class)
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	public ErrorMessage handleAvailabilityException(ValidateAvailabilityException exception) {
-		return new ErrorMessage(exception.getMessage(),HttpStatus.BAD_REQUEST.toString());
-	}
 	
 	@ExceptionHandler(DoctorException.class)
 	@ResponseStatus(HttpStatus.NOT_FOUND)

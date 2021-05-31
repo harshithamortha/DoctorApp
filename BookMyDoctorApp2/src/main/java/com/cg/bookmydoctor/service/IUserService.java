@@ -6,9 +6,9 @@ import com.cg.bookmydoctor.exception.ValidateUserException;
 
 public interface IUserService {
 	
-	public User addUser(User user) throws UserException, ValidateUserException;
-	public User updateUser(User user) throws UserException;
-	public User removeUser(User user) throws UserException;
-	public User getUser(User user)throws UserException;
+	User addUser(User user) throws UserException, ValidateUserException;
+	User updateUser(User user) throws UserException, ValidateUserException;
+	User removeUser(User user) throws UserException;
+	User getUser(User user)throws UserException;
 
 }

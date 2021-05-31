@@ -27,7 +27,7 @@ import com.cg.bookmydoctor.serviceimpl.DoctorServiceImpl;
 public class DoctorController {
 	
 	@Autowired
-	DoctorServiceImpl doctorService;
+	private DoctorServiceImpl doctorService;
 
 	//working
 	@PostMapping("/adddoctor")
@@ -49,7 +49,7 @@ public class DoctorController {
 
 	//working
 	@PutMapping("/updatedoctor")
-	public Doctor updateDoctorProfile(@RequestBody Doctor doctor) throws DoctorException {
+	public Doctor updateDoctorProfile(@RequestBody Doctor doctor) throws DoctorException, ValidateDoctorException {
 		return doctorService.updateDoctorProfile(doctor);
 	}
 	

@@ -15,7 +15,7 @@ import com.cg.bookmydoctor.exception.ValidateUserException;
 import com.cg.bookmydoctor.serviceimpl.UserServiceImpl;
 
 /**
- * @author Samyuktha
+ * @author Harshitha
  *         REST Controller with different HTTP methods 
  *         as GET,POST,DELETE and their respective URL mappings class level
  *         request mapping as "user"       
@@ -25,7 +25,7 @@ import com.cg.bookmydoctor.serviceimpl.UserServiceImpl;
 public class UserController {
 	
 	@Autowired
-	UserServiceImpl userService ;
+	private UserServiceImpl userService ;
    
 	//working
 	@PostMapping("/adduser")
@@ -35,7 +35,7 @@ public class UserController {
  
 	//working
 	@PutMapping("/updateuser")
-	public User updateUser(@RequestBody User user) throws UserException {
+	public User updateUser(@RequestBody User user) throws UserException, ValidateUserException {
 		return userService.updateUser(user);
 	}
 
