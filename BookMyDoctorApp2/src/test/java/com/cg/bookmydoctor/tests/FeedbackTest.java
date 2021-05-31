@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +63,13 @@ public class FeedbackTest  extends BookMyDoctorApp2ApplicationTests {
 		assertNotNull(feedbackGet);
 	}
 	
-	
+	@After
+	public void setDown() {
+		doctorservice = null;
+		patientservice=null;
+		feedbackservice=null;
+		
+	}
 	
 
 }

@@ -1,11 +1,13 @@
 package com.cg.bookmydoctor.tests;
 
 import static org.junit.Assert.assertEquals;
+
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,6 +18,7 @@ import com.cg.bookmydoctor.dto.Patient;
 import com.cg.bookmydoctor.exception.PatientException;
 import com.cg.bookmydoctor.exception.ValidatePatientException;
 import com.cg.bookmydoctor.service.IPatientService;
+import com.cg.bookmydoctor.serviceimpl.PatientServiceImpl;
 
 @SpringBootTest
 public class PatientTest extends BookMyDoctorApp2ApplicationTests {
@@ -24,7 +27,11 @@ public class PatientTest extends BookMyDoctorApp2ApplicationTests {
 	@Autowired
 	private IPatientDao patientDao;
 	
-	
+	@Before
+	public void setUp() {
+		patientservice = new PatientServiceImpl();
+				
+	}
 	@Test
 	void testpatientServiceImpl() {
 		assertTrue(patientservice instanceof IPatientService);
@@ -39,6 +46,11 @@ public class PatientTest extends BookMyDoctorApp2ApplicationTests {
 		Patient patient1 = new Patient(2,"Soumya","7829901763","soumya@gmail.com","Soumya@234","O+","Female",28,"Hyderabad");
 		patient1 = patientservice.addPatient(patient1);
 		assertEquals(patient1.getPatientId(),2);
+		
+		Patient patient2 = new Patient(4,"Vamsi","7829901653","vamsi@gmail.com","V@msi234","O+","Male",28,"Hyderabad");
+		patient2 = patientservice.addPatient(patient2);
+		assertEquals(patient2.getPatientId(),4);
+		
 	}
 	
 	
