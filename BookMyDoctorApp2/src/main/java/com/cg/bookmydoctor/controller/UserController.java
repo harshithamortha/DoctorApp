@@ -27,27 +27,27 @@ public class UserController {
 	@Autowired
 	private UserServiceImpl userService ;
    
-	//working
+	
 	@PostMapping("/adduser")
-	public User addUser(@RequestBody User user) throws UserException, ValidateUserException {
+	public User addUser(@RequestBody final User user) throws UserException, ValidateUserException {
 		return userService.addUser(user);
 	}
  
-	//working
+	
 	@PutMapping("/updateuser")
-	public User updateUser(@RequestBody User user) throws UserException, ValidateUserException {
+	public User updateUser(@RequestBody final User user) throws UserException, ValidateUserException {
 		return userService.updateUser(user);
 	}
 
-	//working
+	
 	@DeleteMapping("/removeuser")
-	public User removeUser(@RequestBody User user)  throws UserException{
+	public User removeUser(@RequestBody final User user)  throws UserException{
 		return userService.removeUser(user);
 	}
 	
-	//working
+	
 	@GetMapping("/getuser/{userId}")
-	public User getUser(@PathVariable("userId") User user) throws UserException {
+	public User getUser(@PathVariable("userId") final User user) throws UserException {
 		return userService.getUser(user);
 	}
 }

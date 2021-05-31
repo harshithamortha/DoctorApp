@@ -29,49 +29,49 @@ public class DoctorController {
 	@Autowired
 	private DoctorServiceImpl doctorService;
 
-	//working
+	
 	@PostMapping("/adddoctor")
 	public Doctor addDoctor(@RequestBody Doctor doctor) throws DoctorException, ValidateDoctorException {
 		return doctorService.addDoctor(doctor);
 	}
 
-	//working
+	
 	@GetMapping("/getalldoctors")
 	public List<Doctor> getDoctorList() {
 		return doctorService.getDoctorList();
 	}
 
-	//working
+	
 	@DeleteMapping("/removedoctor")
 	public Doctor removeDoctor(@RequestBody Doctor doctor) throws DoctorException {
 		return doctorService.removeDoctor(doctor);
 	}
 
-	//working
+	
 	@PutMapping("/updatedoctor")
 	public Doctor updateDoctorProfile(@RequestBody Doctor doctor) throws DoctorException, ValidateDoctorException {
 		return doctorService.updateDoctorProfile(doctor);
 	}
 	
-	//working
+	
 	@GetMapping("/getdoctor/{doctorId}")
 	public Doctor getDoctor(@PathVariable("doctorId") Doctor doc) throws DoctorException {
 		return doctorService.getDoctor(doc);
 	}
 	
-	//working
+	
 	@GetMapping("/getdoctors/{speciality}")
 	public List<Doctor> getDoctorList(@PathVariable("speciality") String speciality) throws DoctorException {
 		return doctorService.getDoctorList(speciality);
 	}
 	
-	//working
+	
 	@PostMapping("/addavailability")
 	public boolean addAvailability(@RequestBody AvailabilityDates bean) {
 		return doctorService.addAvailability(bean);
 	}
 	
-    //working
+   
 	@PutMapping("/updateavailability")
 	public boolean updateAvailability(@RequestBody AvailabilityDates bean) {
 		return doctorService.updateAvailability(bean);

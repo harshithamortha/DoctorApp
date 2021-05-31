@@ -34,13 +34,13 @@ public class FeedBackController {
 		return feedbackService.getAllFeedback(doctor);
 	}
 
-	//working
+	
 	@PostMapping("/addfeedback")
 	public FeedBack addFeedback(@RequestBody FeedBack feedback) throws FeedBackException, ValidateFeedBackException {
 		return feedbackService.addFeedback(feedback);
 	}
 
-	//working
+	
 	@GetMapping("/getfeedback")
 	public FeedBack getFeedback(@RequestParam("feedbackid") FeedBack fdb) throws FeedBackException {
 		return feedbackService.getFeedback(fdb);

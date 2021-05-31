@@ -33,32 +33,30 @@ public class AppointmentController {
 	@Autowired
 	private AppointmentServiceImpl appointmentService;
 
-	//working
+	
 	@GetMapping("/getallappointments")
 	public List<Appointment> getAllAppointments() {
 		return appointmentService.getAllAppointments();
 	}
 	
-	//working
+	
 	@PostMapping("/addappointment")
 	public Appointment addAppointment(@RequestBody Appointment app) throws AppointmentException, ValidateAppointmentException{
 		return appointmentService.addAppointment(app);
 	}
 	
-	//working
+	
 	@GetMapping("/getappointment/{appointmentId}")
 	public Appointment getAppointment(@PathVariable("appointmentId") int appointmentId) throws AppointmentException {
 		return appointmentService.getAppointment(appointmentId);
 	}
 
-	
-	//working
+
 	@DeleteMapping("/deleteappointment/{id}")
 	public boolean deleteAppointment(@PathVariable("id") int appointmentId) throws AppointmentException {
 		return appointmentService.deleteAppointment(appointmentId);
 	}
 	
-	//working
 	@PutMapping("/updateappointment")
 	public boolean updateAppointment(@RequestBody Appointment bean) throws ValidateAppointmentException {
 		return appointmentService.updateAppointment(bean);
@@ -70,7 +68,6 @@ public class AppointmentController {
 		return appointmentService.getAppointments(doc);
 	}
 	
-	//working
 	@GetMapping("/datebasedappointments")
 	public List<Appointment> getAppointments(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) 
 	@RequestParam("appointmentDate") LocalDate date){

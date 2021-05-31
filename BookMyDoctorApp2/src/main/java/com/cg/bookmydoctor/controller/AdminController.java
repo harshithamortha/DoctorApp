@@ -29,25 +29,24 @@ public class AdminController {
 	@Autowired
 	private AdminServiceImpl adminservice ;
 	
-	//working
+	
    	@GetMapping("/viewadmin/{adminId}")
 	public Admin viewAdmin(@PathVariable("adminId") final Admin admin) throws AdminException {
 		return adminservice.viewAdmin(admin);
 	}
 
-    //working
+   
 	@PostMapping("/addadmin")
 	public Admin addAdmin(@RequestBody final Admin admin) throws AdminException,ValidateAdminException {
 		return adminservice.addAdmin(admin);
 	}
 
-	//working
+	
 	@PutMapping("/updateadmin")
 	public Admin updateAdmin(@RequestBody final Admin admin) throws AdminException, ValidateAdminException {
 		return adminservice.updateAdmin(admin);
 	}
 
-	//working
 	@DeleteMapping("/removeadmin")
 	public Admin removeAdmin(@RequestBody final Admin admin) throws AdminException {
 		return adminservice.removeAdmin(admin);

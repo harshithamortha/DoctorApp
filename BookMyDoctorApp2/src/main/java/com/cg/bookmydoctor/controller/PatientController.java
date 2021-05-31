@@ -31,31 +31,31 @@ public class PatientController {
 	@Autowired
 	private PatientServiceImpl patientService;
 
-	//working
+	
 	@PostMapping("/addpatient")
 	public Patient addPatient(@RequestBody Patient bean) throws PatientException, ValidatePatientException {
 		return patientService.addPatient(bean);
 	}
 
-	//working
+	
 	@PutMapping("/updatepatient")
 	public Patient editPatientProfile(@RequestBody Patient bean) throws PatientException, ValidatePatientException {
 		return patientService.editPatientProfile(bean);
 	}
 	
-	//working
+	
 	@DeleteMapping("/removepatient")
 	public Patient removePatientDetails(@RequestBody Patient bean) throws PatientException {
 		return patientService.removePatientDetails(bean);
 	}
 	
-	//working
+	
 	@GetMapping("/getpatient")
 	public Patient getPatient(@RequestParam("patientId") Patient patient) throws PatientException {
 		return patientService.getPatient(patient);
 	}
 
-	//working
+	
 	@GetMapping("/getallpatients")
 	public List<Patient> getAllPatient() {
 		return patientService.getAllPatient();
