@@ -1,7 +1,6 @@
 package com.cg.bookmydoctor.tests;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
@@ -55,12 +54,11 @@ public class FeedbackTest  extends BookMyDoctorApp2ApplicationTests {
 	}
 	
 	@Test
-	public void testGetFeedback() throws DoctorException, PatientException, FeedBackException {
+	public void testGetFeedBack() throws DoctorException, PatientException, FeedBackException {
 		Doctor doctor = new Doctor(1,"K Priya", "Dental","Mumbai", "Mumbai Hospital","8787778866", "priyaeee@gmail.com","Priya@23", 800);
 		Patient patient = new Patient(2,"Soumya","7829901763","soumya@gmail.com","Soumya@234","O+","Female",28,"Hyderabad");
 		FeedBack feedback = new FeedBack(3,patient,doctor,5,"Excellent");
-		FeedBack feedbackGet = feedbackservice.getFeedback(feedback);
-		assertNotNull(feedbackGet);
+		assertEquals(feedbackservice.getFeedback(feedback),3);
 	}
 	
 	@After

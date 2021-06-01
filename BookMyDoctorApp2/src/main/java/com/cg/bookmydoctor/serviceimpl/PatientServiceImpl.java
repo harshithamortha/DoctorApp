@@ -61,7 +61,7 @@ public class PatientServiceImpl implements IPatientService {
 	}
 	
 	@Override
-	public Patient getPatient(Patient patient) throws PatientException{
+	public Patient getPatient(final Patient patient) throws PatientException{
 		Optional<Patient> patientDb = patientDao.findById(patient.getPatientId());
 		if(patientDb.isPresent()) {
 			return patientDb.get();

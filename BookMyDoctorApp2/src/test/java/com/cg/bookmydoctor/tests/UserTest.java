@@ -1,12 +1,7 @@
 package com.cg.bookmydoctor.tests;
 
 import static org.junit.Assert.assertEquals;
-
 import static org.junit.Assert.assertTrue;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
@@ -65,7 +60,7 @@ public class UserTest extends BookMyDoctorApp2ApplicationTests {
 	void testGetUser() throws UserException {
 		User user = new User(1, "Ruchi", "Ruchi@1206", "Doctor");
 		User getuser = userservice.getUser(user);
-		assertEquals(user.getUserId(),1);
+		assertEquals(getuser.getUserId(),1);
 	}
 	
 	@After

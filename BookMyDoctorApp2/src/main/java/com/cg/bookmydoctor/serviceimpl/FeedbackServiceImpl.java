@@ -34,8 +34,8 @@ public class FeedbackServiceImpl implements IFeedbackService {
 	@Override
 	public FeedBack getFeedback(FeedBack fdb) throws FeedBackException {
 		Optional<FeedBack> feedbackDb = feedbackDao.findById(fdb.getFeedbackId());
-		if(feedbackDb .isPresent()) {
-			return feedbackDb .get();
+		if(feedbackDb.isPresent()) {
+			return feedbackDb.get();
 		} else {
 			throw new FeedBackException("Feedback with ID :" + fdb.getFeedbackId()+"doesn't exist");
 		}
