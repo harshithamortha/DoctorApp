@@ -2,6 +2,7 @@ package com.cg.bookmydoctor.controller;
 
 import java.time.LocalDate;
 
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.cg.bookmydoctor.dto.Appointment;
-import com.cg.bookmydoctor.dto.Doctor;
 import com.cg.bookmydoctor.exception.AppointmentException;
 import com.cg.bookmydoctor.exception.ValidateAppointmentException;
 import com.cg.bookmydoctor.serviceimpl.AppointmentServiceImpl;
@@ -62,11 +62,6 @@ public class AppointmentController {
 		return appointmentService.updateAppointment(bean);
 	}
 	
-	
-	@GetMapping("/doctorbasedappointments/{id}")
-	public List<Appointment> getAppointments(@PathVariable("id")Doctor doc) {
-		return appointmentService.getAppointments(doc);
-	}
 	
 	@GetMapping("/datebasedappointments")
 	public List<Appointment> getAppointments(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) 

@@ -1,9 +1,8 @@
 package com.cg.bookmydoctor.controller;
 
-import java.time.LocalDate;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.cg.bookmydoctor.dto.Doctor;
 import com.cg.bookmydoctor.dto.Patient;
 import com.cg.bookmydoctor.exception.PatientException;
 import com.cg.bookmydoctor.exception.ValidatePatientException;
@@ -61,14 +59,4 @@ public class PatientController {
 		return patientService.getAllPatient();
 	}
 	
-	@GetMapping("/getallpatientbydoctor")
-	public List<Patient> getPatientListByDoctor(@RequestParam("doctorname") Doctor doc) {
-		return patientService.getPatientListByDoctor(doc);
-	}
-	
-	
-	@GetMapping("/getallpatienbydate")
-	public List<Patient> getPatientListByDate(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam("appointmentdate")LocalDate appdate) {
-		return patientService.getPatientListByDate(appdate);
-	}
 }
