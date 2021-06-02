@@ -15,7 +15,7 @@ import com.cg.bookmydoctor.exception.ValidateUserException;
 import com.cg.bookmydoctor.serviceimpl.UserServiceImpl;
 
 /**
- * @author Harshitha
+ * @author Shivani
  *         REST Controller with different HTTP methods 
  *         as GET,POST,DELETE and their respective URL mappings class level
  *         request mapping as "user"       
