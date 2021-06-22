@@ -15,57 +15,61 @@ public class User {
 	@Column(name = "userId", unique=true)
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int userId;
+		
+	private String userEmail;
 	
-	@Column(name="userName")
-	private String userName;
-	
-	@Column(name="password")
 	private String password;
 	
-	@Column(name="role")
 	private String role; // admin//doctor //patient
 	
 	public User() {
 		
 	}
-	
-	public User(int userId, String userName, String password, String role) {
+
+	public User(int userId, String userEmail, String password, String role) {
 		super();
 		this.userId = userId;
-		this.userName =  userName;
+		this.userEmail = userEmail;
 		this.password = password;
 		this.role = role;
 	}
+
 	public int getUserId() {
 		return userId;
 	}
+
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public String getUserName() {
-		return userName;
+
+	public String getUserEmail() {
+		return userEmail;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public String getRole() {
 		return role;
 	}
+
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
-	
+
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", role=" + role + "]";
+		return "User [userId=" + userId + ", userEmail=" + userEmail + ", password=" + password + ", role=" + role
+				+ "]";
 	}
-
-
+	
 }

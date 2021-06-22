@@ -17,16 +17,12 @@ public class Admin {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int adminId;
 	
-	@Column(name= "adminName")
 	private String adminName;
 	
-	@Column(name="contactNumber")
 	private String contactNumber;
-	
-	@Column(name="email")
+
 	private String email;
 	
-	@Column(name="password")
 	private String password;
 	
 	public Admin() {}

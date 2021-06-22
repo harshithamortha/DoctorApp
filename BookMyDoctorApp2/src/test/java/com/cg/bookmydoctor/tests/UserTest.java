@@ -46,7 +46,7 @@ public class UserTest extends BookMyDoctorApp2ApplicationTests {
 	void testUpdateUser() throws ValidateUserException, UserException {
 		User user = new User(1, "Ruchitha", "Ruchi@1206", "Doctor");
 		user = userservice.updateUser(user);
-		assertEquals(user.getUserName(), "Ruchitha");
+		assertEquals(user.getUserEmail(), "Ruchitha");
 	}
 	
 	@Test

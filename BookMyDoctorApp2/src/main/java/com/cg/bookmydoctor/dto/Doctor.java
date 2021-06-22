@@ -2,6 +2,8 @@ package com.cg.bookmydoctor.dto;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +18,7 @@ public class Doctor {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int doctorId;
 	
+	@NotBlank
 	@Column(name="doctorName")
 	private String doctorName;
 	

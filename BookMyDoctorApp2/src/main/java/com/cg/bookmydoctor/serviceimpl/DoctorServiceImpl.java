@@ -140,6 +140,7 @@ public class DoctorServiceImpl implements IDoctorService {
 		if(!doctor.getSpeciality().matches(AllConstants.NAME_PATTERN)) {
 			throw new ValidateDoctorException(AllConstants.EMPTY_SPECIALITY);
 		}
+		
 		return true;
 	}
 
