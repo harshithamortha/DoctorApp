@@ -90,8 +90,8 @@ public class AppointmentServiceImpl implements IAppointmentService {
 		}
 		
 		private boolean validateAppointment(Appointment appointment) throws ValidateAppointmentException{
-			if (!appointment.getAppointmentStatus().matches("Approved") && !appointment.getAppointmentStatus().matches("Cancelled")
-					&&!appointment.getAppointmentStatus().matches("Completed")) {
+			if (!appointment.getAppointmentStatus().matches("approved") && !appointment.getAppointmentStatus().matches("cancelled")
+					&&!appointment.getAppointmentStatus().matches("completed")&&!appointment.getAppointmentStatus().matches("waiting")) {
 				throw new ValidateAppointmentException(AllConstants.STATUS_INVALID);
 			}
 			if (!appointment.getRemark().matches(AllConstants.NAME_PATTERN)) {

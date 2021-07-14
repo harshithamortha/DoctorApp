@@ -1,6 +1,7 @@
 package com.cg.bookmydoctor.serviceimpl;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +57,13 @@ public class FeedbackServiceImpl implements IFeedbackService {
 	@Override
 	public List<FeedBack> getAllFeedback(Doctor doc) {
 		return null;
+	}
+	@Override
+	public List<FeedBack> getFeedbackList()  throws FeedBackException {
+		Iterable<FeedBack> result = feedbackDao.findAll();
+		List<FeedBack> resultList = new ArrayList<>();
+		result.forEach(resultList :: add);
+		return resultList;
 	}
 		
 }

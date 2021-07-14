@@ -12,6 +12,6 @@ public interface IFeedbackService {
 	FeedBack addFeedback(FeedBack fdb) throws FeedBackException, ValidateFeedBackException;
 	FeedBack getFeedback(FeedBack fdb) throws FeedBackException;
 	List<FeedBack> getAllFeedback(Doctor doc);
-	
+	List<FeedBack> getFeedbackList() throws FeedBackException ;
 	
 }

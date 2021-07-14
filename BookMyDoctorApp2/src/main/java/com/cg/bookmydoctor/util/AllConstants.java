@@ -3,7 +3,7 @@ package com.cg.bookmydoctor.util;
 public class AllConstants {
 	
 	public static final String PASSWORD_PATTERN="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\\S+$).{8,20}$";
-	public static final String NAME_PATTERN ="([a-zA-Z]+|[A-Za-z]+[ ]{1}[a-zA-Z]+)";
+	public static final String NAME_PATTERN ="([A-Za-z ]{1,32})";
 	public static final String USERNAME_PATTERN = "^[a-zA-Z0-9_]+$";
 	public static final String EMAIL_PATTERN = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";
 	public static final String PHONENUMBER_PATTERN	= "[1-9][0-9]{9}";

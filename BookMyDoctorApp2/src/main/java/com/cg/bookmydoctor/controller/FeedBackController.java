@@ -1,6 +1,8 @@
 package com.cg.bookmydoctor.controller;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +31,10 @@ public class FeedBackController {
 	@Autowired
 	private FeedbackServiceImpl feedbackService;
 
-
+	@GetMapping("/getallfeedbacks")
+	public List<FeedBack> getFeedbackList() throws FeedBackException {
+		return feedbackService.getFeedbackList();
+	}
 	
 	@PostMapping("/addfeedback")
 	public FeedBack addFeedback(@RequestBody FeedBack feedback) throws FeedBackException, ValidateFeedBackException {
